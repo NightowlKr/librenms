@@ -3,6 +3,8 @@ group: radware
 text: AlteonOS
 type: network
 icon: radware
+mib_dir:
+    - alteonos
 over:
     - { graph: device_bits, text: 'Device Traffic' }
     - { graph: device_processor, text: 'CPU Usage' }
@@ -10,5 +12,6 @@ over:
 discovery:
     -
         sysObjectID:
-            - .1.3.6.1.4.1.1872.1.13.3.5
-            - .1.3.6.1.4.1.1872.2.
+            - .1.3.6.1.4.1.1872.1.13.1  # Nortel  Alteon Application Switch 2000 Serise
+            - .1.3.6.1.4.1.1872.1.13.2  # Nortel  Alteon Application Switch 3000 Serise
+            - .1.3.6.1.4.1.1872.1.13.3  # Radware Alteon Application Switches
