@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomMapController.php
  *
@@ -35,6 +36,7 @@ class CustomMapController extends WidgetController
     protected $defaults = [
         'title' => null,
         'custom_map' => null,
+        'screenshot' => false,
     ];
 
     public function __construct()
@@ -48,7 +50,7 @@ class CustomMapController extends WidgetController
 
         $data['map'] = CustomMap::find($data['custom_map']);
         if (! $data['map']) {
-            abort(404, 'Custom map not found or not defined');
+            return __('map.custom.widget.not_found');
         }
         $data['base_url'] = Config::get('base_url');
         $data['background_config'] = $data['map']->getBackgroundConfig();

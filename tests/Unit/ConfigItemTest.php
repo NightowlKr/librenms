@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit;
+namespace LibreNMS\Tests\Unit;
 
+use LibreNMS\Tests\TestCase;
 use LibreNMS\Util\DynamicConfigItem;
-use PHPUnit\Framework\TestCase;
 
 class ConfigItemTest extends TestCase
 {
