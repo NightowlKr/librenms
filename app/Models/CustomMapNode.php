@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomMapNode.php
  *
@@ -64,6 +65,11 @@ class CustomMapNode extends BaseModel
     public function linked_map(): BelongsTo
     {
         return $this->belongsTo(CustomMap::class, 'linked_custom_map_id');
+    }
+
+    public function nodeimage(): BelongsTo
+    {
+        return $this->belongsTo(CustomMapNodeImage::class, 'node_image_id');
     }
 
     public function edges1(): HasMany

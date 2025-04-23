@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomMapController.php
  *
@@ -31,11 +32,11 @@ use App\Models\CustomMapEdge;
 use App\Models\CustomMapNode;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use LibreNMS\Config;
 use LibreNMS\Util\Number;
-use LibreNMS\Util\Url;
 
 class CustomMapDataController extends Controller
 {
@@ -69,13 +70,14 @@ class CustomMapDataController extends Controller
                 'text_face' => $edge->text_face,
                 'text_size' => $edge->text_size,
                 'text_colour' => $edge->text_colour,
+                'text_align' => $edge->text_align,
                 'mid_x' => $edge->mid_x,
                 'mid_y' => $edge->mid_y,
             ];
             if ($edge->port) {
                 $edges[$edgeid]['device_id'] = $edge->port->device_id;
                 $edges[$edgeid]['port_name'] = $edge->port->device->displayName() . ' - ' . $edge->port->getLabel();
-                $edges[$edgeid]['port_info'] = Url::portLink($edge->port, null, null, false, true);
+                $edges[$edgeid]['port_info'] = Blade::render('<x-port-link-map :port="$port" />', ['port' => $edge->port]);
 
                 // Work out speed to and from
                 $speedto = 0;
@@ -172,6 +174,7 @@ class CustomMapDataController extends Controller
                 'style' => $node->style,
                 'icon' => $node->icon,
                 'image' => $node->image,
+                'nodeimage' => $node->nodeimage ? $node->nodeimage->custom_map_node_image_id : null,
                 'size' => $node->size,
                 'border_width' => $node->border_width,
                 'text_face' => $node->text_face,
@@ -192,14 +195,18 @@ class CustomMapDataController extends Controller
 
             // set up linked device and status
             if ($node->device) {
+                $warning_time = Config::get('uptime_warning', 86400);
+
                 $nodes[$nodeid]['device_name'] = $node->device->hostname . '(' . $node->device->sysName . ')';
                 $nodes[$nodeid]['device_image'] = $node->device->icon;
-                $nodes[$nodeid]['device_info'] = Url::deviceLink($node->device, null, [], 0, 0, 0, 0);
+                $nodes[$nodeid]['device_info'] = Blade::render('<x-device-link-map :device="$device" />', ['device' => $node->device]);
 
                 if ($node->device->disabled) {
                     $this->setNodeDisabledStyle($nodes[$nodeid]);
                 } elseif (! $node->device->status) {
                     $this->setNodeDownStyle($nodes[$nodeid], $request);
+                } elseif ($node->device->uptime < $warning_time && $node->device->uptime != 0) {
+                    $this->setNodeWarningStyle($nodes[$nodeid], $request);
                 }
             }
         }
@@ -261,12 +268,13 @@ class CustomMapDataController extends Controller
                         abort(404);
                     }
                 }
-                $dbnode->device_id = is_numeric($node['title']) ? $node['title'] : null;
-                $dbnode->linked_custom_map_id = str_starts_with($node['title'], 'map:') ? (int) str_replace('map:', '', $node['title']) : null;
+                $dbnode->device_id = $node['device_id'];
+                $dbnode->linked_custom_map_id = $node['linked_map_id'];
                 $dbnode->label = $node['label'];
                 $dbnode->style = $node['shape'];
                 $dbnode->icon = $node['icon'];
                 $dbnode->image = $node['image']['unselected'] ?? '';
+                $dbnode->node_image_id = $node['nodeimage'] ?? null;
                 $dbnode->size = $node['size'];
                 $dbnode->text_face = $node['font']['face'];
                 $dbnode->text_size = $node['font']['size'];
@@ -304,6 +312,7 @@ class CustomMapDataController extends Controller
                 $dbedge->text_face = $edge['text_face'];
                 $dbedge->text_size = $edge['text_size'];
                 $dbedge->text_colour = $edge['text_colour'];
+                $dbedge->text_align = $edge['text_align'];
                 $dbedge->mid_x = intval($edge['mid_x']);
                 $dbedge->mid_y = intval($edge['mid_y']);
 
@@ -384,6 +393,16 @@ class CustomMapDataController extends Controller
     {
         $node_data_array['colour_bg_view'] = Config::get('network_map_legend.di.border');
         $node_data_array['colour_bdr_view'] = Config::get('network_map_legend.di.node');
+    }
+
+    protected function setNodeWarningStyle(array &$node_data_array, Request $request): void
+    {
+        $node_data_array['colour_bg_view'] = Config::get('network_map_legend.wn.node');
+        $node_data_array['colour_bdr_view'] = Config::get('network_map_legend.wn.border');
+        // Change the text colour as long as we have not been requested by the editor
+        if ($request->headers->get('referer') && ! str_ends_with(parse_url($request->headers->get('referer'), PHP_URL_PATH), '/edit')) {
+            $node_data_array['text_colour'] = 'darkorange';
+        }
     }
 
     protected function setNodeDownStyle(array &$node_data_array, Request $request): void
