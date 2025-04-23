@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Url.php
  *
@@ -147,9 +148,10 @@ class Url
             $text = $label;
         }
 
-        $content = '<div class=list-large>' . addslashes(htmlentities($port->device?->displayName() . ' - ' . $label)) . '</div>';
+        // strip tags due to complexity of sanitizing here
+        $content = '<div class=list-large>' . addslashes(htmlentities(strip_tags($port->device?->displayName() . ' - ' . $label))) . '</div>';
         if ($description = $port->getDescription()) {
-            $content .= addslashes(htmlentities($description)) . '<br />';
+            $content .= addslashes(htmlentities(strip_tags($description))) . '<br />';
         }
 
         $content .= "<div style=\'width: 850px\'>";
