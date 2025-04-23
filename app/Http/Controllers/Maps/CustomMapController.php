@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CustomMapController.php
  *
@@ -28,10 +29,12 @@ namespace App\Http\Controllers\Maps;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomMapSettingsRequest;
 use App\Models\CustomMap;
+use App\Models\CustomMapNodeImage;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use LibreNMS\Config;
 
@@ -156,7 +159,7 @@ class CustomMapController extends Controller
         $data['map_conf']['width'] = $map->width;
         $data['map_conf']['height'] = $map->height;
         // Override some settings for the editor
-        $data['map_conf']['interaction'] = ['dragNodes' => true, 'dragView' => false, 'zoomView' => false];
+        $data['map_conf']['interaction'] = ['dragNodes' => true, 'dragView' => false, 'zoomView' => false, 'multiselect' => true];
         $data['map_conf']['manipulation'] = ['enabled' => true, 'initiallyActive' => true];
         $data['map_conf']['physics'] = ['enabled' => false];
 
@@ -209,6 +212,7 @@ class CustomMapController extends Controller
                 'color' => Config::get('custom_map.edge_font_color', '#343434'),
                 'size' => Config::get('custom_map.edge_font_size', 12),
                 'face' => Config::get('custom_map.edge_font_face', 'arial'),
+                'align' => Config::get('custom_map.edge_font_align', 'horizontal'),
             ],
             'label' => true,
         ];
@@ -240,6 +244,51 @@ class CustomMapController extends Controller
         ]);
     }
 
+    public function clone(CustomMap $map): JsonResponse
+    {
+        $newmap = $map->replicate();
+        $newmap->name .= ' - Clone';
+
+        if ($map->background) {
+            $newbackground = $map->background->replicate();
+        } else {
+            $newbackground = null;
+        }
+
+        $nodes = $map->nodes()->get();
+        $edges = $map->edges()->get();
+
+        DB::transaction(function () use ($newmap, $newbackground, $nodes, $edges) {
+            $newmap->save();
+
+            if ($newbackground) {
+                $newbackground->custom_map_id = $newmap->custom_map_id;
+                $newbackground->save();
+            }
+
+            $node_id_map = collect();
+            foreach ($nodes as $id => $node) {
+                $newnode = $node->replicate();
+                $newnode->custom_map_id = $newmap->custom_map_id;
+                $newnode->save();
+
+                $node_id_map->put($node->custom_map_node_id, $newnode->custom_map_node_id);
+            }
+
+            foreach ($edges as $id => $edge) {
+                $newedge = $edge->replicate();
+                $newedge->custom_map_id = $newmap->custom_map_id;
+                $newedge->custom_map_node1_id = $node_id_map->get($edge->custom_map_node1_id);
+                $newedge->custom_map_node2_id = $node_id_map->get($edge->custom_map_node2_id);
+                $newedge->save();
+            }
+        });
+
+        return response()->json([
+            'id' => $newmap->custom_map_id,
+        ]);
+    }
+
     /**
      * Get a list of all available node images with a label.
      */
@@ -256,6 +305,12 @@ class CustomMapController extends Controller
                 $images[$file] = $image_translations[$filename] ?? ucwords(str_replace(['-', '_'], [' - ', ' '], $filename));
             }
         }
+
+        foreach (CustomMapNodeImage::all() as $image) {
+            $images[$image->custom_map_node_image_id] = $image->name;
+        }
+
+        asort($images);
 
         return $images;
     }
@@ -281,7 +336,7 @@ class CustomMapController extends Controller
     /**
      * Return the default legend colours
      */
-    private function getDefaultLegendColours(): array|null
+    private function getDefaultLegendColours(): ?array
     {
         $ret = Config::get('custom_map.legend_colours', null);
 
