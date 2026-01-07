@@ -1,0 +1,127 @@
+modules:
+    sensors:
+        percent:
+            data:
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.2
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.2'
+                    descr: CPU Used
+                    index: cpuUsed
+                    group: CPU
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.4
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.4'
+                    descr: CPU Idle
+                    index: cpuIdle
+                    group: CPU
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.5
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.5'
+                    descr: CPU User
+                    index: cpuUser
+                    group: CPU
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.6
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.6'
+                    descr: CPU System
+                    index: cpuSys
+                    group: CPU
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.7
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.7'
+                    descr: CPU IO
+                    index: cpuIo
+                    group: CPU
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.3
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.3'
+                    descr: Memory Used
+                    index: memUsed
+                    group: Memory
+        count:
+            data:
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.8
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.8'
+                    descr: Memory Total
+                    index: memTotal
+                    group: Memory
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.9
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.9'
+                    descr: Memory Free
+                    index: memFree
+                    group: Memory
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.10
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.10'
+                    descr: Memory Cache
+                    index: memCache
+                    group: Memory
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.11
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.11'
+                    descr: Memory Buffer
+                    index: memBuffer
+                    group: Memory
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.13
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.13'
+                    descr: Detection Engines
+                    index: deTotal
+                    group: Detection Engine
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.15
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.15'
+                    descr: Connections Per Second
+                    index: cps
+                    group: Detection Engine
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.16
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.16'
+                    descr: Transactions Per Second
+                    index: tps
+                    group: Detection Engine
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.17
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.17'
+                    descr: Detection Engine Sessions
+                    index: deSession
+                    group: Detection Engine
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.18
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.18'
+                    descr: Detection Engine Traffic (Kbps)
+                    index: deTraffic
+                    group: Detection Engine
+                    multiplier: 8
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.19
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.19'
+                    descr: NP Sessions
+                    index: npSession
+                    group: Network Processor
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.20
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.20'
+                    descr: NP Kernel Buffer
+                    index: npKernelBuffer
+                    group: Network Processor
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.21
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.21'
+                    descr: Throughput (Kbps)
+                    index: throughput
+                    group: Traffic
+        state:
+            data:
+                -
+                    oid: .1.3.6.1.4.1.9772.1.2.0.3.12
+                    num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.12'
+                    descr: SW Bypass
+                    index: swBypass
+                    group: System
+                    state_name: pentasecurityWapplesSwBypass
+                    states:
+                        - { value: 0, generic: 0, graph: 1, descr: 'swbypass off' }
+                        - { value: 1, generic: 2, graph: 1, descr: 'swbypass on' }
