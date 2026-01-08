@@ -5,36 +5,42 @@ modules:
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.2
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.2'
+                    value: iso
                     descr: CPU Used
                     index: cpuUsed
                     group: CPU
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.4
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.4'
+                    value: iso
                     descr: CPU Idle
                     index: cpuIdle
                     group: CPU
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.5
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.5'
+                    value: iso
                     descr: CPU User
                     index: cpuUser
                     group: CPU
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.6
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.6'
+                    value: iso
                     descr: CPU System
                     index: cpuSys
                     group: CPU
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.7
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.7'
+                    value: iso
                     descr: CPU IO
                     index: cpuIo
                     group: CPU
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.3
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.3'
+                    value: iso
                     descr: Memory Used
                     index: memUsed
                     group: Memory
@@ -43,54 +49,63 @@ modules:
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.8
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.8'
+                    value: iso
                     descr: Memory Total
                     index: memTotal
                     group: Memory
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.9
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.9'
+                    value: iso
                     descr: Memory Free
                     index: memFree
                     group: Memory
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.10
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.10'
+                    value: iso
                     descr: Memory Cache
                     index: memCache
                     group: Memory
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.11
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.11'
+                    value: iso
                     descr: Memory Buffer
                     index: memBuffer
                     group: Memory
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.13
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.13'
+                    value: iso
                     descr: Detection Engines
                     index: deTotal
                     group: Detection Engine
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.15
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.15'
+                    value: iso
                     descr: Connections Per Second
                     index: cps
                     group: Detection Engine
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.16
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.16'
+                    value: iso
                     descr: Transactions Per Second
                     index: tps
                     group: Detection Engine
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.17
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.17'
+                    value: iso
                     descr: Detection Engine Sessions
                     index: deSession
                     group: Detection Engine
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.18
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.18'
+                    value: iso
                     descr: Detection Engine Traffic (Kbps)
                     index: deTraffic
                     group: Detection Engine
@@ -98,18 +113,21 @@ modules:
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.19
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.19'
+                    value: iso
                     descr: NP Sessions
                     index: npSession
                     group: Network Processor
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.20
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.20'
+                    value: iso
                     descr: NP Kernel Buffer
                     index: npKernelBuffer
                     group: Network Processor
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.21
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.21'
+                    value: iso
                     descr: Throughput (Kbps)
                     index: throughput
                     group: Traffic
@@ -118,10 +136,11 @@ modules:
                 -
                     oid: .1.3.6.1.4.1.9772.1.2.0.3.12
                     num_oid: '.1.3.6.1.4.1.9772.1.2.0.3.12'
+                    value: iso
                     descr: SW Bypass
                     index: swBypass
                     group: System
                     state_name: pentasecurityWapplesSwBypass
                     states:
-                        - { value: 0, generic: 0, graph: 1, descr: 'swbypass off' }
-                        - { value: 1, generic: 2, graph: 1, descr: 'swbypass on' }
+                        - { value: 0, generic: 0, graph: 1, descr: 'Off' }
+                        - { value: 1, generic: 2, graph: 1, descr: 'On' }
