@@ -1,12 +1,14 @@
 <?php
 
+use App\Models\Device;
+
 $no_refresh = true;
 
 $link_array = ['page' => 'device',
     'device' => $device['device_id'],
     'tab' => 'edit', ];
 
-if (! Auth::user()->hasGlobalAdmin()) {
+if (Gate::denies('update', Device::class)) {
     print_error('Insufficient Privileges');
 } else {
     $panes['device'] = 'Device Settings';
@@ -66,14 +68,14 @@ if (! Auth::user()->hasGlobalAdmin()) {
         echo $sep;
         if ($vars['section'] == $type) {
             echo "<span class='pagemenu-selected'>";
-        } else {
         }
 
-        if ($type == 'device') {
-            echo '<a href="' . route('device.edit', [$device['device_id']]) . "\">$text</a>";
-        } else {
-            echo generate_link($text, $link_array, ['section' => $type]);
-        }
+        echo match ($type) {
+            'device' => '<a href="' . route('device.edit', [$device['device_id']]) . "\">$text</a>",
+            'misc' => '<a href="' . route('device.edit.misc', [$device['device_id']]) . "\">$text</a>",
+            'health' => '<a href="' . route('device.edit.health', [$device['device_id']]) . "\">$text</a>",
+            default => generate_link($text, $link_array, ['section' => $type]),
+        };
 
         if ($vars['section'] == $type) {
             echo '</span>';

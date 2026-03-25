@@ -33,7 +33,7 @@ if ($vars['string']) {
     $param[] = '%' . $vars['string'] . '%';
 }
 
-if (Auth::user()->hasGlobalRead()) {
+if (Gate::allows('viewAll', \App\Models\Device::class)) {
     $sql = " FROM `eventlog` AS E LEFT JOIN `devices` AS `D` ON `E`.`device_id`=`D`.`device_id` WHERE $where";
 } else {
     $sql = " FROM `eventlog` AS E, devices_perms AS P WHERE $where AND E.device_id = P.device_id AND P.user_id = ?";
@@ -76,7 +76,7 @@ $sql = "SELECT `E`.*,DATE_FORMAT(datetime, '" . \App\Facades\LibrenmsConfig::get
 foreach (dbFetchRows($sql, $param) as $eventlog) {
     $dev = device_by_id_cache($eventlog['device_id']);
     if ($eventlog['type'] == 'interface') {
-        $this_if = cleanPort(getifbyid($eventlog['reference']));
+        $this_if = cleanPort(get_port_by_id($eventlog['reference']));
         $type = '<b>' . generate_port_link($this_if, Rewrite::shortenIfName(strtolower((string) $this_if['label']))) . '</b>';
     } else {
         $type = $eventlog['type'];
