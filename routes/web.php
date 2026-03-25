@@ -37,6 +37,8 @@ use App\Http\Controllers\PollerSettingsController;
 use App\Http\Controllers\PortController;
 use App\Http\Controllers\PortGroupController;
 use App\Http\Controllers\PushNotificationController;
+use App\Http\Controllers\RealtimeDataController;
+use App\Http\Controllers\RealtimeGraphController;
 use App\Http\Controllers\Search\PortSecuritySearchController;
 use App\Http\Controllers\Select;
 use App\Http\Controllers\SensorController;
@@ -118,6 +120,12 @@ Route::middleware(['auth'])->group(function (): void {
     Route::middleware('can:admin')->group(function (): void {
         Route::get('/device/{device}/edit', [Device\EditDeviceController::class, 'index'])->name('device.edit');
         Route::put('/device/{device}/edit', [Device\EditDeviceController::class, 'update'])->name('device.edit.update');
+        Route::get('/device/{device}/edit/health', [Device\EditHealthController::class, 'index'])->name('device.edit.health');
+        Route::post('/device/{device}/edit/health/sensor/reset', [Device\EditHealthController::class, 'reset'])->name('device.edit.health.sensor.reset');
+        Route::post('/device/{device}/edit/health/sensor/{sensor}/update', [Device\EditHealthController::class, 'update'])->name('device.edit.health.sensor.update')->scopeBindings();
+        Route::post('/device/{device}/edit/health/sensor/{sensor}/alert', [Device\EditHealthController::class, 'updateAlert'])->name('device.edit.health.sensor.alert')->scopeBindings();
+        Route::get('/device/{device}/edit/misc', [Device\EditMiscController::class, 'index'])->name('device.edit.misc');
+        Route::put('/device/{device}/edit/misc', [Device\EditMiscController::class, 'update'])->name('device.edit.misc.update');
         Route::post('/device/{device}/rediscover', [DeviceController::class, 'rediscover'])->name('device.rediscover');
     });
 
@@ -232,6 +240,9 @@ Route::middleware(['auth'])->group(function (): void {
         Route::delete('{user}', [Auth\TwoFactorManagementController::class, 'destroy'])->name('2fa.delete');
     });
 
+    Route::get('realtime/graph/{port}', RealtimeGraphController::class)->name('realtime.graph');
+    Route::get('realtime/data/{port}', RealtimeDataController::class)->name('realtime.data');
+
     // Ajax routes
     Route::prefix('ajax')->group(function (): void {
         // page ajax controllers
@@ -245,7 +256,6 @@ Route::middleware(['auth'])->group(function (): void {
         Route::post('set_map_view', [Ajax\AvailabilityMapController::class, 'setView']);
         Route::post('set_resolution', [Ajax\SessionController::class, 'resolution']);
         Route::post('set_style', [Ajax\SessionController::class, 'style']);
-        Route::get('netcmd', [Ajax\NetCommand::class, 'run']);
         Route::post('ripe/raw', [Ajax\RipeNccApiController::class, 'raw']);
         Route::get('snmp/capabilities', Ajax\SnmpCapabilities::class)->name('snmp.capabilities');
 
@@ -287,6 +297,11 @@ Route::middleware(['auth'])->group(function (): void {
 
         // jquery bootgrid data controllers
         Route::prefix('table')->group(function (): void {
+            Route::post('address-search/ipv4', Table\Ipv4AddressSearchController::class)->name('search.ipv4');
+            Route::post('address-search/ipv6', Table\Ipv6AddressSearchController::class)->name('search.ipv6');
+            Route::post('address-search/mac', Table\MacSearchController::class)->name('search.mac');
+            Route::post('alertlog', Table\AlertLogController::class)->name('table.alertlog');
+            Route::get('alertlog/export', [Table\AlertLogController::class, 'export'])->name('table.alertlog.export');
             Route::post('alert-schedule', Table\AlertScheduleController::class);
             Route::post('customers', Table\CustomersController::class);
             Route::post('diskio', Table\DiskioController::class)->name('table.diskio');
@@ -328,6 +343,7 @@ Route::middleware(['auth'])->group(function (): void {
         Route::prefix('dash')->group(function (): void {
             Route::post('alerts', Widgets\AlertsController::class);
             Route::post('alertlog', Widgets\AlertlogController::class);
+            Route::post('alert-map', Widgets\AlertMapController::class);
             Route::post('alertlog-stats', Widgets\AlertlogStatsController::class);
             Route::post('availability-map', Widgets\AvailabilityMapController::class);
             Route::post('component-status', Widgets\ComponentStatusController::class);

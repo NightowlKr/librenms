@@ -320,8 +320,6 @@ SNMP program locations.
     lnms config:set nagios_plugins /usr/lib/nagios/plugins
     lnms config:set ipmitool /usr/bin/ipmitool
     lnms config:set virsh /usr/bin/virsh
-    lnms config:set dot /usr/bin/dot
-    lnms config:set sfdp /usr/bin/sfdp
     ```
 
 ## Authentication
@@ -1050,6 +1048,25 @@ Matches are compared case-insensitive.
     ```bash
     lnms config:set rewrite_if '{"cpu": "Management Interface"}'
     lnms config:set rewrite_if_regexp '{"/cpu /": "Management "}'
+    ```
+
+## VLANs to ignore
+
+Some devices report VLANs that may not be relevant or are system-reserved.
+This allows you to ignore specific VLAN IDs on a per-OS basis.
+
+As an example, if you have some VLANs with IDs that should be ignored on Cisco IOS:
+
+```text
+VLAN 1002 (fddi-default)
+VLAN 1003 (token-ring-default)
+VLAN 1004 (fddinet-default)
+VLAN 1005 (trnet-default)
+```
+
+!!! setting "discovery/vlans"
+    ```bash
+    lnms config:set os.ios.ignore_vlans '[1002, 1003, 1004, 1005]'
     ```
 
 ## Entity sensors to be ignored

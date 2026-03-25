@@ -36,6 +36,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use LibreNMS\Data\Source\Fping;
 use LibreNMS\Data\Source\FpingResponse;
@@ -93,7 +94,7 @@ class PingCheck implements ShouldQueue
             Log::debug("Leftover waiting on devices, this shouldn't happen: " . $this->waiting_on->keys()->implode(', '));
         }
 
-        if (\App::runningInConsole()) {
+        if (App::runningInConsole()) {
             printf("Pinged %s devices in %.2fs\n", $this->devices->count(), microtime(true) - $ping_start);
         }
     }
@@ -178,7 +179,7 @@ class PingCheck implements ShouldQueue
         }
 
         // mark up only if snmp is not down too
-        $changed = app(SetDeviceAvailability::class)->execute($device, $response->success(), AvailabilitySource::ICMP, true);
+        $changed = app(SetDeviceAvailability::class)->execute($device, $response->success(), AvailabilitySource::Icmp, true);
 
         // save last_ping_timetaken and rrd data
         $response->saveStats($device);
