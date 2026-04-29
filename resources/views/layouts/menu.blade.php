@@ -79,6 +79,11 @@
                                                                        aria-hidden="true"></i> {{ __('Oxidized') }}</a>
                                 </li>
                                 @endconfig
+                                @can('viewAny', \App\Models\SslCertificate::class)
+                                <li><a href="{{ url('ssl-certificates') }}"><i class="fa fa-lock fa-fw fa-lg fa-nav-icons"
+                                    aria-hidden="true"></i> {{ __('SSL Certificates') }}</a>
+                                </li>
+                                @endcan
                             </ul>
                         </li>
                         <li role="presentation" class="divider"></li>
@@ -421,6 +426,10 @@
                        data-toggle="dropdown"><i class="fa fa-heartbeat fa-fw fa-lg fa-nav-icons"
                                                  aria-hidden="true"></i> <span class="tw:md:hidden tw:lg:inline-block">{{ __('Health') }}</span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="{{ url('health/metric=all?status=alert') }}"><i class="fas fa-bell fa-fw fa-lg"
+                                                                            aria-hidden="true"></i> {{ __('Alerts') }}</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
                         <li><a href="{{ url('health/metric=mempool') }}"><i class="fas fa-memory fa-fw fa-lg"
                                                                             aria-hidden="true"></i> {{ __('Memory') }}</a>
                         </li>
@@ -582,6 +591,10 @@
                         <li><a href="{{ url('alert-rules') }}"><i class="fa fa-list fa-fw fa-lg"
                                                                   aria-hidden="true"></i> {{ __('Alert Rules') }}</a></li>
                         @endcan
+                        @can('viewAny', \App\Models\AlertOperation::class)
+                        <li><a href="{{ route('alert-operations.index') }}"><i class="fa fa-sliders fa-fw fa-lg"
+                                                                       aria-hidden="true"></i> {{ __('Operations') }}</a></li>
+                        @endcan
                         @can('viewAny', \App\Models\AlertSchedule::class)
                         <li><a href="{{ url('alert-schedule') }}"><i class="fa fa-calendar fa-fw fa-lg"
                                                                      aria-hidden="true"></i> {{ __('Scheduled Maintenance') }}
@@ -647,8 +660,8 @@
                         <li><a href="{{ url('validate') }}"><i class="fa fa-check-circle fa-fw fa-lg"
                                                                aria-hidden="true"></i> {{ __('Validate Config') }}</a></li>
                         @endcanany
-                        <li role="presentation" class="divider"></li>
                         @can('viewAny', \App\Models\User::class)
+                        <li role="presentation" class="divider"></li>
                         <li><a href="{{ route('users.index') }}"><i class="fa fa-user-circle-o fa-fw fa-lg"
                                                                     aria-hidden="true"></i> {{ __('Manage Users') }}</a>
                         </li>
@@ -681,8 +694,8 @@
                         <li class="dropdown-submenu">
                             <a href="#"><i class="fa fa-code fa-fw fa-lg" aria-hidden="true"></i> {{ __('API') }}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('api-access') }}"><i class="fa fa-cog fa-fw fa-lg"
-                                                                         aria-hidden="true"></i> {{ __('API Settings') }}
+                                <li><a href="{{ route('api-access.index') }}"><i class="fa fa-cog fa-fw fa-lg"
+                                                                         aria-hidden="true"></i> {{ __('API Tokens') }}
                                     </a></li>
                                 <li><a href="https://docs.librenms.org/API/" target="_blank" rel="noopener"><i
                                             class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i> {{ __('API Docs') }}</a>
@@ -829,7 +842,7 @@
             }
         });
 
-    var hideDashboardEditor = {{ (int)$hide_dashboard_editor }};
+    var hideDashboardEditor = {{ (int) $hide_dashboard_editor }};
     function toggleDashboardEditor() {
         $.ajax({
             url: '{{ route('preferences.store') }}',
@@ -842,15 +855,6 @@
             success: function () {
                 hideDashboardEditor = hideDashboardEditor ? 0 : 1;
                 $('#toggle-dashboard-editor-text').text(hideDashboardEditor ? '{{ __('Show Dashboard Editor') }}' : '{{ __('Hide Dashboard Editor') }}')
-
-                // disable and hide editing
-                if (typeof gridster !== 'undefined') {
-                    gridster.disable();
-                    gridster.disable_resize();
-                    gridster_state = 0;
-                    $('.fade-edit').fadeOut();
-                    dashboard_collapse("#hide_edit");
-                }
 
                 $('#dashboard-editor').collapse(hideDashboardEditor ? 'hide' : 'show');
             }

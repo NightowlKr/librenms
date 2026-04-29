@@ -28,6 +28,14 @@ class BillPolicy
     }
 
     /**
+     * Determine whether the user can view all models.
+     */
+    public function viewAll(User $user): bool
+    {
+        return $this->hasGlobalPermission($user, 'viewAll');
+    }
+
+    /**
      * Determine whether the user can view the bill.
      */
     public function view(User $user, Bill $bill): bool
@@ -37,7 +45,7 @@ class BillPolicy
         }
 
         return $this->hasGlobalPermission($user, 'view')
-            || Permissions::canAccessBill($bill, $user);
+            && Permissions::canAccessBill($bill, $user);
     }
 
     /**
