@@ -5,8 +5,13 @@ use LibreNMS\Data\Source\SnmpQueryInterface;
 if (! function_exists('alteon_snmp')) {
     function alteon_snmp(array $device): SnmpQueryInterface
     {
-        return \SnmpQuery::cache()
-            ->deviceArray($device)
+        $query = \SnmpQuery::cache();
+        $deviceId = (int) ($device['device_id'] ?? 0);
+        if ($deviceId > 0) {
+            $query->device(\DeviceCache::get($deviceId));
+        }
+
+        return $query
             ->mibDir('alteonos')
             ->mibDir('radware')
             ->mibDir('nortel')
