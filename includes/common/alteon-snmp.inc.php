@@ -259,6 +259,7 @@ if (! function_exists('alteon_virtual_service_definitions')) {
             4 => 'stateless',
             5 => 'tcpandudp',
             6 => 'sctp',
+            2147483647 => 'unsupported',
         ];
 
         $usedEnhanced = ! empty($entries);
@@ -315,6 +316,8 @@ if (! function_exists('alteon_virtual_service_protocol')) {
             4 => 'STATELESS',
             5 => 'TCP+UDP',
             6 => 'SCTP',
+            32767, 2147483647 => 'UNSUPPORTED',
+            default => 'UNKNOWN',
         };
     }
 }
@@ -334,6 +337,7 @@ if (! function_exists('alteon_virtual_service_protocol_lookup')) {
             4 => 'STATELESS',
             5 => 'TCP+UDP',
             6 => 'SCTP',
+            2147483647 => 'UNSUPPORTED',
         ];
 
         foreach ($oids as $oid) {
