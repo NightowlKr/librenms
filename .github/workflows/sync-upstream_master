@@ -1,0 +1,36 @@
+name: Sync upstream master to origin master
+
+on:
+  schedule:
+    # KST 03:10 daily = UTC 18:10 previous day
+    - cron: "10 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout fork repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/NightowlKr/librenms.git
+          git fetch upstream master
+
+      - name: Reset origin master to upstream master
+        run: |
+          git checkout master
+          git reset --hard upstream/master
+          git push origin master --force-with-lease
