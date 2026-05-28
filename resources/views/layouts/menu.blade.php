@@ -126,18 +126,18 @@
                 </li>
 {{-- Devices --}}
                 <li class="dropdown">
-                    <a href="{{ url('devices/') }}" class="dropdown-toggle" data-hover="dropdown"
+                    <a href="{{ route('devices') }}" class="dropdown-toggle" data-hover="dropdown"
                        data-toggle="dropdown"><i class="fa fa-server fa-fw fa-lg fa-nav-icons"
                                                  aria-hidden="true"></i> <span>{{ __('Devices') }}</span></a>
                     <ul class="dropdown-menu">
                     @if($no_devices_added)
                     <li><a href="#"><i class="fa fa-server fa-fw fa-lg" aria-hidden="true"></i> {{ __('No Devices') }}</a>
                     @else
-                    <li @class(['dropdown-submenu' => $device_types->isNotEmpty()])><a href="{{ url('devices') }}"><i class="fa fa-server fa-fw fa-lg" aria-hidden="true"></i> {{ __('All Devices') }}</a>
+                    <li @class(['dropdown-submenu' => $device_types->isNotEmpty()])><a href="{{ route('devices') }}"><i class="fa fa-server fa-fw fa-lg" aria-hidden="true"></i> {{ __('All Devices') }}</a>
                         @if($device_types->isNotEmpty())
                         <ul class="dropdown-menu scrollable-menu">
                         @foreach($device_types as $type => $icon)
-                            <li><a href="{{ url("devices/type=$type") }}"><i class="fa fa-{{ $icon }} fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($type) }}</a></li>
+                            <li><a href="{{ route('devices', ['filter' => ['type' => ['eq' => $type]]]) }}"><i class="fa fa-{{ $icon }} fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($type) }}</a></li>
                         @endforeach
                         </ul>
                         @endif
@@ -150,7 +150,7 @@
                                 </a>
                             <ul class="dropdown-menu scrollable-menu">
                             @foreach($device_groups as $group)
-                                <li><a href="{{ url("devices/group=$group->id") }}" title="{{ $group->desc }}"><i class="fa fa-th fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($group->name) }}</a></li>
+                                <li><a href="{{ route('devices', ['filter' => ['groups.id' => ['eq' => $group->id]]]) }}" title="{{ $group->desc }}"><i class="fa fa-th fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($group->name) }}</a></li>
                             @endforeach
                             </ul>
                         </li>
@@ -162,7 +162,7 @@
                             <ul class="dropdown-menu scrollable-menu">
                                 <li><a href="{{ url('locations') }}"><i class="fa fa-map-marker fa-fw fa-lg" aria-hidden="true"></i> {{ __('All Locations') }}</a></li>
                             @foreach($locations as $location)
-                                    <li><a href="{{ url("devices/location=" . $location->id) }}"><i class="fa fa-building fa-fw fa-lg" aria-hidden="true"></i> {{ $location->display() }}</a></li>
+                                    <li><a href="{{ route('devices', ['filter' => ['location_id' => ['eq' => $location->id]]]) }}"><i class="fa fa-building fa-fw fa-lg" aria-hidden="true"></i> {{ $location->display() }}</a></li>
                             @endforeach
                             </ul>
                         </li>
@@ -298,21 +298,21 @@
                 </li>
 {{-- Ports --}}
                 <li class="dropdown">
-                    <a href="{{ url('ports') }}" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><i
+                    <a href="{{ route('ports') }}" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><i
                             class="fa fa-link fa-fw fa-lg fa-nav-icons" aria-hidden="true"></i> <span
                             class="tw:md:hidden tw:lg:inline-block">{{ __('Ports') }}</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('ports') }}"><i class="fa fa-link fa-fw fa-lg"
+                        <li><a href="{{ route('ports') }}"><i class="fa fa-link fa-fw fa-lg"
                                                             aria-hidden="true"></i> {{ __('All Ports') }}</a></li>
 
                         @if($port_counts['errored'] > 0)
-                            <li><a href="{{ url('ports/errors=1') }}"><i class="fa fa-exclamation-circle fa-fw fa-lg"
+                            <li><a href="{{ route('ports', ['view' => 'detail', 'filter' => ['errors' => ['eq' => '1']]]) }}"><i class="fa fa-exclamation-circle fa-fw fa-lg"
                                                                            aria-hidden="true"></i> {{ __('Errored :port_count', ['port_count' => $port_counts['errored']]) }}
                                 </a></li>
                         @endif
 
                         @if($port_counts['ignored'] > 0)
-                            <li><a href="{{ url('ports/ignore=1') }}"><i class="fa fa-question-circle fa-fw fa-lg"
+                            <li><a href="{{ route('ports', ['view' => 'detail', 'filter' => ['ignore' => ['eq' => '1']]]) }}"><i class="fa fa-question-circle fa-fw fa-lg"
                                                                            aria-hidden="true"></i> {{ __('Ignored :port_count', ['port_count' => $port_counts['ignored']]) }}
                                 </a></li>
                         @endif
@@ -331,7 +331,7 @@
                             </li>
                         @endif
 
-                        <li><a href="{{ url('search/secureports') }}"><i class="fa fa-shield fa-fw fa-lg"
+                        <li><a href="{{ route('port-security.index') }}"><i class="fa fa-shield fa-fw fa-lg"
                                                                          aria-hidden="true"></i> {{ __('Port Security') }}</a>
                         </li>
 
@@ -349,32 +349,32 @@
                                 </li>
                                 @endconfig
                                 @config('int_l2tp')
-                                <li><a href="{{ url('iftype/type=l2tp') }}"><i class="fa fa-link fa-fw fa-lg"
+                                <li><a href="{{ route('porttype.graph', ['l2tp']) }}"><i class="fa fa-link fa-fw fa-lg"
                                                                                aria-hidden="true"></i> {{ __('L2TP') }}</a>
                                 </li>
                                 @endconfig
                                 @config('int_transit')
-                                <li><a href="{{ url('iftype/type=transit') }}"><i class="fa fa-truck fa-fw fa-lg"
+                                <li><a href="{{ route('porttype.graph', ['transit']) }}"><i class="fa fa-truck fa-fw fa-lg"
                                                                                   aria-hidden="true"></i> {{ __('Transit') }}
                                     </a></li>
                                 @endconfig
                                 @config('int_peering')
-                                <li><a href="{{ url('iftype/type=peering') }}"><i class="fa fa-handshake-o fa-fw fa-lg"
+                                <li><a href="{{ route('porttype.graph', ['peering']) }}"><i class="fa fa-handshake-o fa-fw fa-lg"
                                                                                   aria-hidden="true"></i> {{ __('Peering') }}
                                     </a></li>
                                 @endconfig
                                 @if(\App\Facades\LibrenmsConfig::get('int_peering') && \App\Facades\LibrenmsConfig::get('int_transit'))
-                                    <li><a href="{{ url('iftype/type=peering,transit') }}"><i
+                                    <li><a href="{{ route('porttype.graph', ['peering,transit']) }}"><i
                                                 class="fa fa-rocket fa-fw fa-lg"
                                                 aria-hidden="true"></i> {{ __('Peering + Transit') }}</a></li>
                                 @endif
                                 @config('int_core')
-                                <li><a href="{{ url('iftype/type=core') }}"><i class="fa fa-code-fork fa-fw fa-lg"
+                                <li><a href="{{ route('porttype.graph', ['core']) }}"><i class="fa fa-code-fork fa-fw fa-lg"
                                                                                aria-hidden="true"></i> {{ __('Core') }}</a>
                                 </li>
                                 @endconfig
                                 @foreach($custom_port_descr as $custom_descr)
-                                    <li><a href="{{ url('iftype/type=' . urlencode($custom_descr['name'])) }}"><i class="fa {{$custom_descr['icon']}} fa-fw fa-lg" aria-hidden="true"></i> {{ ucwords($custom_descr['name']) }}</a></li>
+                                    <li><a href="{{ route('porttype.graph', [urlencode($custom_descr['name'])]) }}"><i class="fa {{$custom_descr['icon']}} fa-fw fa-lg" aria-hidden="true"></i> {{ ucwords($custom_descr['name']) }}</a></li>
                                 @endforeach
                             @endif
 
@@ -387,7 +387,7 @@
                                 <a href="{{ url('port-groups') }}"><i class="fa fa-th fa-fw fa-lg" aria-hidden="true"></i> {{ __('Port Groups') }}</a>
                                 <ul class="dropdown-menu scrollable-menu">
                                 @foreach($port_groups as $group)
-                                    <li><a href="{{ url("ports/group=$group->id") }}" title="{{ $group->desc }}"><i class="fa fa-th fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($group->name) }}</a></li>
+                                    <li><a href="{{ route('ports', ['filter' => ['groups.id' => ['eq' => $group->id]]]) }}" title="{{ $group->desc }}"><i class="fa fa-th fa-fw fa-lg" aria-hidden="true"></i> {{ ucfirst($group->name) }}</a></li>
                                 @endforeach
                                 </ul>
                                 </li>
@@ -395,23 +395,23 @@
 
                             <li role="presentation" class="divider"></li>
                             @if($port_counts['alerted'])
-                                <li><a href="{{ url('ports/alerted=1') }}"><i
+                                <li><a href="{{ route('ports', ['view' => 'detail', 'errors' => 1]) }}"><i
                                             class="fa fa-exclamation-circle fa-fw fa-lg"
                                             aria-hidden="true"></i> {{ __('Alerts :port_count', ['port_count' => $port_counts['alerted']]) }}
                                     </a></li>
                             @endif
 
-                            <li><a href="{{ url('ports/state=down') }}"><i class="fa fa-arrow-circle-down fa-fw fa-lg"
+                            <li><a href="{{ route('ports', ['view' => 'detail', 'filter' => ['state' => ['eq' => 'down']]]) }}"><i class="fa fa-arrow-circle-down fa-fw fa-lg"
                                                                            aria-hidden="true"></i> {{ __('Down :port_count', ['port_count' => $port_counts['down']]) }}
                                 </a></li>
-                            <li><a href="{{ url('ports/state=admindown') }}"><i
+                            <li><a href="{{ route('ports', ['view' => 'detail', 'filter' => ['state' => ['eq' => 'shutdown']]]) }}"><i
                                         class="fa fa-arrow-circle-o-down fa-fw fa-lg"
                                         aria-hidden="true"></i> {{ __('Disabled :port_count', ['port_count' => $port_counts['shutdown']]) }}
                                 </a></li>
 
                             @can('delete', \App\Models\Port::class)
                             @if($port_counts['deleted'])
-                                <li><a href="{{ url('ports/deleted=1') }}"><i class="fa fa-minus-circle fa-fw fa-lg"
+                                <li><a href="{{ route('ports', ['view' => 'detail', 'filter' => ['deleted' => ['eq' => '1']]]) }}"><i class="fa fa-minus-circle fa-fw fa-lg"
                                                                                 aria-hidden="true"></i> {{ __('Deleted :port_count', ['port_count' => $port_counts['deleted']]) }}
                                     </a></li>
                             @endif
