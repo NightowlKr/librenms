@@ -1,9 +1,11 @@
 <?php
 
-use LibreNMS\Data\Source\SnmpQueryInterface;
+use LibreNMS\Data\Source\Snmp\SnmpQueryInterface;
+use LibreNMS\Data\Source\SnmpQueryInterface as LegacySnmpQueryInterface;
 
 if (! function_exists('alteon_snmp')) {
-    function alteon_snmp(array $device): SnmpQueryInterface
+    // Support both sides of the upstream SNMP namespace migration.
+    function alteon_snmp(array $device): SnmpQueryInterface|LegacySnmpQueryInterface
     {
         $query = \SnmpQuery::cache();
         $deviceId = (int) ($device['device_id'] ?? 0);
