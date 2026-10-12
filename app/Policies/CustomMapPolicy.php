@@ -15,11 +15,19 @@ class CustomMapPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $this->hasGlobalPermission($user, 'view')
+        return $this->hasGlobalPermission($user, 'view', true)
             || $this->hasGlobalPermission($user, 'viewAll')
             || $this->hasGlobalPermission($user, 'create')
             || $this->hasGlobalPermission($user, 'update')
             || $this->hasGlobalPermission($user, 'delete');
+    }
+
+    /**
+     * Determine whether the user can view all models.
+     */
+    public function viewAll(User $user): bool
+    {
+        return $this->hasGlobalPermission($user, 'viewAll');
     }
 
     /**
@@ -31,8 +39,8 @@ class CustomMapPolicy
             return true;
         }
 
-        if ($this->hasGlobalPermission($user, 'view')) {
-            $device_ids = $customMap->nodes()->whereNotNull('device_id')->pluck('device_id');
+        if ($this->hasGlobalPermission($user, 'view', true)) {
+            $device_ids = $customMap->nodes()->whereNotNull('device_id')->pluck('device_id'); // TODO not a query here
 
             // Restricted users can only view maps that have at least one device
             if (count($device_ids) === 0) {

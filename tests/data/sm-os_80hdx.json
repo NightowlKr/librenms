@@ -2431,7 +2431,7 @@
                     "entPhysicalParentRelPos": 1,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 1
                 },
                 {
                     "entPhysicalIndex": 11,
@@ -2451,7 +2451,7 @@
                     "entPhysicalParentRelPos": 2,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 2
                 },
                 {
                     "entPhysicalIndex": 12,
@@ -2471,7 +2471,7 @@
                     "entPhysicalParentRelPos": 3,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 3
                 },
                 {
                     "entPhysicalIndex": 13,
@@ -2491,7 +2491,7 @@
                     "entPhysicalParentRelPos": 4,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 4
                 },
                 {
                     "entPhysicalIndex": 14,
@@ -2511,7 +2511,7 @@
                     "entPhysicalParentRelPos": 5,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 5
                 },
                 {
                     "entPhysicalIndex": 15,
@@ -2531,7 +2531,7 @@
                     "entPhysicalParentRelPos": 6,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 6
                 },
                 {
                     "entPhysicalIndex": 16,
@@ -2551,7 +2551,7 @@
                     "entPhysicalParentRelPos": 7,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 7
                 },
                 {
                     "entPhysicalIndex": 17,
@@ -2571,7 +2571,7 @@
                     "entPhysicalParentRelPos": 8,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 8
                 },
                 {
                     "entPhysicalIndex": 18,
@@ -2591,7 +2591,7 @@
                     "entPhysicalParentRelPos": 9,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 9
                 },
                 {
                     "entPhysicalIndex": 19,
@@ -2611,7 +2611,7 @@
                     "entPhysicalParentRelPos": 10,
                     "entPhysicalMfgName": "",
                     "entPhysicalMfgDate": "0-0-0,0:0:0.0",
-                    "ifIndex": null
+                    "ifIndex": 10
                 }
             ]
         },
@@ -2850,154 +2850,132 @@
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Active",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Not in service",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Not ready",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Create and go",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Create and wait",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Destroy",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "sfpLOSPinOut",
                     "state_descr": "LOS Detected",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "sfpLOSPinOut",
                     "state_descr": "LOS OK",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "sfpTxFaultPinOut",
                     "state_descr": "Fault",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "sfpTxFaultPinOut",
                     "state_descr": "OK",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "BPSK",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "4QAM",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "8PSK",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "16QAM",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "32QAM",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "64QAM",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "128QAM",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "256QAM",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "512QAM",
-                    "state_draw_graph": 1,
                     "state_value": 9,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "1024QAM",
-                    "state_draw_graph": 1,
                     "state_value": 10,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "2048QAM",
-                    "state_draw_graph": 1,
                     "state_value": 11,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "4096QAM",
-                    "state_draw_graph": 1,
                     "state_value": 12,
                     "state_generic_value": 0
                 }
@@ -3235,154 +3213,132 @@
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Active",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Not in service",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Not ready",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Create and go",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Create and wait",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "pwrSupplyRowStatus",
                     "state_descr": "Destroy",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "sfpLOSPinOut",
                     "state_descr": "LOS Detected",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "sfpLOSPinOut",
                     "state_descr": "LOS OK",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "sfpTxFaultPinOut",
                     "state_descr": "Fault",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "sfpTxFaultPinOut",
                     "state_descr": "OK",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "BPSK",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "4QAM",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "8PSK",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "16QAM",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "32QAM",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "64QAM",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "128QAM",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "256QAM",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "512QAM",
-                    "state_draw_graph": 1,
                     "state_value": 9,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "1024QAM",
-                    "state_draw_graph": 1,
                     "state_value": 10,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "2048QAM",
-                    "state_draw_graph": 1,
                     "state_value": 11,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "smosLinkAcmModulation",
                     "state_descr": "4096QAM",
-                    "state_draw_graph": 1,
                     "state_value": 12,
                     "state_generic_value": 0
                 }
@@ -3896,7 +3852,7 @@
             "transceivers": [
                 {
                     "index": "1",
-                    "entity_physical_index": 1,
+                    "entity_physical_index": 10,
                     "type": null,
                     "vendor": "Cambium Networks",
                     "oui": null,
@@ -3915,7 +3871,7 @@
                 },
                 {
                     "index": "2",
-                    "entity_physical_index": 2,
+                    "entity_physical_index": 11,
                     "type": null,
                     "vendor": "",
                     "oui": null,

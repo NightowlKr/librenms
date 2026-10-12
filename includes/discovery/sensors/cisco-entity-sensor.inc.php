@@ -23,6 +23,9 @@ if ($device['os_group'] == 'cisco') {
     $port_array = snmpwalk_cache_multi_oid($device, 'ifName', $port_array, 'ENTITY-MIB:IF-MIB');
     $port_reverse_array = [];
     foreach ($port_array as $index => $port) {
+        if (! isset($port['ifName'])) {
+            continue;
+        }
         $port['ifIndex'] = $index;
         $port_reverse_array[$port['ifName']] = $port;
     }
@@ -202,6 +205,12 @@ if ($device['os_group'] == 'cisco') {
                     $tmp_ifindex = 0;
                     while ($phys_index != 0) {
                         if ($index === $phys_index) {
+                            break;
+                        }
+
+                        if (! isset($entity_array[$phys_index])) {
+                            // NX-OS: entPhysicalContainedIn may reference a parent index (e.g. 1)
+                            // that is not returned by the SNMP walk — stop traversal safely.
                             break;
                         }
 

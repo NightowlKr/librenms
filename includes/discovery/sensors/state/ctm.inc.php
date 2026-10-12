@@ -23,14 +23,17 @@
  * @copyright  2018 Paul Heinrichs
  * @author     Paul Heinrichs <pdheinrichs@gmail.com>
  */
+
+use LibreNMS\Enum\SensorType;
+
 $states = [
     'power' => [
-        ['value' => 1, 'generic' => 0, 'graph' => 0, 'descr' => 'Power On'],
-        ['value' => 0, 'generic' => 1, 'graph' => 0, 'descr' => 'Power Off'],
+        ['value' => 1, 'generic' => 0, 'descr' => 'Power On'],
+        ['value' => 0, 'generic' => 1, 'descr' => 'Power Off'],
     ],
     'sync' => [
-        ['value' => 1, 'generic' => 0, 'graph' => 0, 'descr' => 'Sync Enabled'],
-        ['value' => 0, 'generic' => 1, 'graph' => 0, 'descr' => 'Sync Off'],
+        ['value' => 1, 'generic' => 0, 'descr' => 'Sync Enabled'],
+        ['value' => 0, 'generic' => 1, 'descr' => 'Sync Off'],
     ],
 ];
 $octetSetup = [
@@ -75,7 +78,7 @@ foreach ($octetSetup as $entry) {
             $port_number = $index + 1;
             discover_sensor(
                 null,
-                'state',
+                SensorType::State,
                 $device,
                 $entry['num_oid'],
                 $port_number,

@@ -26,6 +26,9 @@
  * @copyright  2018 Mikael Sipilainen
  * @author     Mikael Sipilainen <mikael.sipilainen@gmail.com>
  */
+
+use LibreNMS\Enum\SensorType;
+
 $ups_state_oid = '.1.3.6.1.4.1.935.1.1.1.4.1.1.0';
 $ups_state = SnmpQuery::get($ups_state_oid)->value();
 
@@ -33,16 +36,16 @@ if (! empty($ups_state) || $ups_state == 0) {
     // UPS state OID (Value : 0-1 Unknown, 2 On Line, 3 On Battery, 4 On Boost, 5 Sleeping, 6 On Bypass, 7 Rebooting, 8 Standby, 9 On Buck )
     $state_name = 'netagent2upsstate';
     $states = [
-        ['value' => 0, 'generic' => 3, 'graph' => 0, 'descr' => 'unknown'],
-        ['value' => 1, 'generic' => 3, 'graph' => 0, 'descr' => 'unknown'],
-        ['value' => 2, 'generic' => 0, 'graph' => 0, 'descr' => 'OnLine'],
-        ['value' => 3, 'generic' => 1, 'graph' => 0, 'descr' => 'OnBattery'],
-        ['value' => 4, 'generic' => 0, 'graph' => 0, 'descr' => 'OnBoost'],
-        ['value' => 5, 'generic' => 1, 'graph' => 0, 'descr' => 'Sleeping'],
-        ['value' => 6, 'generic' => 0, 'graph' => 0, 'descr' => 'OnBypass'],
-        ['value' => 7, 'generic' => 1, 'graph' => 0, 'descr' => 'Rebooting'],
-        ['value' => 8, 'generic' => 0, 'graph' => 0, 'descr' => 'Standby'],
-        ['value' => 9, 'generic' => 0, 'graph' => 0, 'descr' => 'OnBuck'],
+        ['value' => 0, 'generic' => 3, 'descr' => 'unknown'],
+        ['value' => 1, 'generic' => 3, 'descr' => 'unknown'],
+        ['value' => 2, 'generic' => 0, 'descr' => 'OnLine'],
+        ['value' => 3, 'generic' => 1, 'descr' => 'OnBattery'],
+        ['value' => 4, 'generic' => 0, 'descr' => 'OnBoost'],
+        ['value' => 5, 'generic' => 1, 'descr' => 'Sleeping'],
+        ['value' => 6, 'generic' => 0, 'descr' => 'OnBypass'],
+        ['value' => 7, 'generic' => 1, 'descr' => 'Rebooting'],
+        ['value' => 8, 'generic' => 0, 'descr' => 'Standby'],
+        ['value' => 9, 'generic' => 0, 'descr' => 'OnBuck'],
     ];
     create_state_index($state_name, $states);
 
@@ -55,7 +58,7 @@ if (! empty($ups_state) || $ups_state == 0) {
     $state = $ups_state / $divisor;
     $descr = 'UPS state';
 
-    discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+    discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
 }
 
 // Detect type of UPS (Signle-Phase/3 Phase)
@@ -72,8 +75,8 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseDCandRectifierStatusInAndOut';
         $states = [
-            ['value' => 2, 'generic' => 3, 'graph' => 0, 'descr' => 'threeInOneOut'],
-            ['value' => 3, 'generic' => 3, 'graph' => 0, 'descr' => 'threeInThreeOut'],
+            ['value' => 2, 'generic' => 3, 'descr' => 'threeInOneOut'],
+            ['value' => 3, 'generic' => 3, 'descr' => 'threeInThreeOut'],
         ];
         create_state_index($state_name, $states);
 
@@ -86,7 +89,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'In And Out';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Back Status
@@ -96,8 +99,8 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseDCandRectifierStatusBatteryStatus';
         $states = [
-            ['value' => 4, 'generic' => 1, 'graph' => 0, 'descr' => 'backup'],
-            ['value' => 5, 'generic' => 0, 'graph' => 0, 'descr' => 'acnormal'],
+            ['value' => 4, 'generic' => 1, 'descr' => 'backup'],
+            ['value' => 5, 'generic' => 0, 'descr' => 'acnormal'],
         ];
         create_state_index($state_name, $states);
 
@@ -110,7 +113,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Back Status';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Charge Status
@@ -120,9 +123,9 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseDCandRectifierStatusChargeStatus';
         $states = [
-            ['value' => 6, 'generic' => 0, 'graph' => 0, 'descr' => 'boost'],
-            ['value' => 7, 'generic' => 0, 'graph' => 0, 'descr' => 'float'],
-            ['value' => 16, 'generic' => 2, 'graph' => 0, 'descr' => 'no'],
+            ['value' => 6, 'generic' => 0, 'descr' => 'boost'],
+            ['value' => 7, 'generic' => 0, 'descr' => 'float'],
+            ['value' => 16, 'generic' => 2, 'descr' => 'no'],
         ];
         create_state_index($state_name, $states);
 
@@ -135,7 +138,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Charge Status';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Bypass braker status
@@ -145,8 +148,8 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseUPSStatusManualBypassBreaker';
         $states = [
-            ['value' => 8, 'generic' => 1, 'graph' => 0, 'descr' => 'close'],
-            ['value' => 9, 'generic' => 0, 'graph' => 0, 'descr' => 'open'],
+            ['value' => 8, 'generic' => 1, 'descr' => 'close'],
+            ['value' => 9, 'generic' => 0, 'descr' => 'open'],
         ];
         create_state_index($state_name, $states);
 
@@ -159,7 +162,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Breaker Status';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // AC Status
@@ -169,8 +172,8 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseUPSStatusACStatus';
         $states = [
-            ['value' => 10, 'generic' => 0, 'graph' => 0, 'descr' => 'normal'],
-            ['value' => 11, 'generic' => 2, 'graph' => 0, 'descr' => 'abnormal'],
+            ['value' => 10, 'generic' => 0, 'descr' => 'normal'],
+            ['value' => 11, 'generic' => 2, 'descr' => 'abnormal'],
         ];
         create_state_index($state_name, $states);
 
@@ -183,13 +186,13 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'AC status';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Common State - Inverter active, Rectifier Operating
     $states = [
-        ['value' => 14, 'generic' => 0, 'graph' => 0, 'descr' => 'yes'],
-        ['value' => 16, 'generic' => 2, 'graph' => 0, 'descr' => 'no'],
+        ['value' => 14, 'generic' => 0, 'descr' => 'yes'],
+        ['value' => 16, 'generic' => 2, 'descr' => 'no'],
     ];
 
     // Inverter active
@@ -209,7 +212,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Inverter Operating';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Rectifier Operating
@@ -229,7 +232,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Rectifier Operating';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Switch Mode
@@ -239,8 +242,8 @@ if ($in_phaseNum == '3') {
     if (! empty($ups_state) || $ups_state == 0) {
         $state_name = 'upsThreePhaseUPSStaticSwitchMode';
         $states = [
-            ['value' => 12, 'generic' => 0, 'graph' => 0, 'descr' => 'invermode'],
-            ['value' => 13, 'generic' => 1, 'graph' => 0, 'descr' => 'bypassmode'],
+            ['value' => 12, 'generic' => 0, 'descr' => 'invermode'],
+            ['value' => 13, 'generic' => 1, 'descr' => 'bypassmode'],
         ];
         create_state_index($state_name, $states);
 
@@ -253,13 +256,13 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Switch Mode';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Common State - Rectifier Rotation Error, Bypass Status and Short Circuit
     $states = [
-        ['value' => 14, 'generic' => 2, 'graph' => 0, 'descr' => 'yes'],
-        ['value' => 16, 'generic' => 0, 'graph' => 0, 'descr' => 'no'],
+        ['value' => 14, 'generic' => 2, 'descr' => 'yes'],
+        ['value' => 16, 'generic' => 0, 'descr' => 'no'],
     ];
 
     // Rectifier Rotation Error
@@ -279,7 +282,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Rectifier Rotation Error';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Bypass Status
@@ -299,7 +302,7 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Bypass freq. fail';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 
     // Short Circuit
@@ -319,6 +322,6 @@ if ($in_phaseNum == '3') {
         $state = $ups_state / $divisor;
         $descr = 'Short Circuit';
 
-        discover_sensor(null, 'state', $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
+        discover_sensor(null, SensorType::State, $device, $ups_state_oid, $index, $state_name, $descr, $divisor, 1, $lowlimit, $lowwarnlimit, $warnlimit, $limit, $state);
     }
 }

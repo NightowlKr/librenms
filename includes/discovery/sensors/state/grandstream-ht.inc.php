@@ -23,12 +23,15 @@
  * @copyright  2025 LibreNMS
  * @author     LibreNMS Contributors
  */
+
+use LibreNMS\Enum\SensorType;
+
 echo 'Grandstream HT: ';
 
 $state_name = 'hookStatus';
 $states = [
-    ['value' => 0, 'generic' => 0, 'graph' => 1, 'descr' => 'On Hook'],
-    ['value' => 1, 'generic' => 0, 'graph' => 1, 'descr' => 'Off Hook'],
+    ['value' => 0, 'generic' => 0, 'descr' => 'On Hook'],
+    ['value' => 1, 'generic' => 0, 'descr' => 'Off Hook'],
 ];
 
 create_state_index($state_name, $states);
@@ -52,7 +55,7 @@ if (is_array($statuses)) {
 
         discover_sensor(
             null,
-            'state',
+            SensorType::State,
             $device,
             $oid,
             $state_index,
@@ -76,8 +79,8 @@ if (is_array($statuses)) {
 
 $state_name = 'regStatus';
 $states = [
-    ['value' => 0, 'generic' => 0, 'graph' => 1, 'descr' => 'Registered'],
-    ['value' => 1, 'generic' => 2, 'graph' => 1, 'descr' => 'Not Registered'],
+    ['value' => 0, 'generic' => 0, 'descr' => 'Registered'],
+    ['value' => 1, 'generic' => 2, 'descr' => 'Not Registered'],
 ];
 
 create_state_index($state_name, $states);
@@ -101,7 +104,7 @@ if (is_array($statuses)) {
 
         discover_sensor(
             null,
-            'state',
+            SensorType::State,
             $device,
             $oid,
             $state_index,

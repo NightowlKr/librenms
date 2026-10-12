@@ -16758,35 +16758,30 @@
                 {
                     "state_name": "rlEnvMonFanStatusTable",
                     "state_descr": "OK",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "rlEnvMonFanStatusTable",
                     "state_descr": "Missing",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "rlPhdUnitEnvParamEntry",
                     "state_descr": "Normal",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "rlPhdUnitEnvParamEntry",
                     "state_descr": "Warning",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "rlPhdUnitEnvParamEntry",
                     "state_descr": "Critical",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 }
@@ -20965,7 +20960,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "UES2.236.18",
-                    "remote_port": "port e0/1/1 (00017af98d0f)",
+                    "remote_port": "port e0/1/1",
                     "remote_platform": null,
                     "remote_version": "MyPower S3100-20TP",
                     "ifAlias": "gigabitethernet1/0/23",
@@ -20976,7 +20971,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "Metro Ethernet Switch",
-                    "remote_port": "31 2F 32 36 00 (1c7ee56ab220)",
+                    "remote_port": "1/26",
                     "remote_platform": null,
                     "remote_version": "Metro Ethernet Switch",
                     "ifAlias": "gigabitethernet1/0/24",
@@ -20987,7 +20982,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "GXP1625_00:0b:82:f6:1e:68",
-                    "remote_port": "00 0B 82 F6 1E 68 (000b82f61e68)",
+                    "remote_port": "00:0b:82:f6:1e:68",
                     "remote_platform": null,
                     "remote_version": "GXP1625 1.0.4.128",
                     "ifAlias": "gigabitethernet1/0/7",
@@ -20998,7 +20993,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "Huawei",
-                    "remote_port": "GigabitEthernet0/0/0 (e0cc7ac515c0)",
+                    "remote_port": "GigabitEthernet0/0/0",
                     "remote_platform": null,
                     "remote_version": "Huawei AP4050DN Huawei Versatile Routing Platform Software  VRP (R) software,Version 5.170 (AP4050DN V200R008C10SPC900) Copyright (C) 2011-2018 Huawei Technolog",
                     "ifAlias": "HOTSPOT_UES2",
@@ -21009,7 +21004,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "MikroTik",
-                    "remote_port": "bridge1/ether1 (744d28eb6d5b)",
+                    "remote_port": "bridge1/ether1",
                     "remote_platform": null,
                     "remote_version": "MikroTik RouterOS 6.48.6 (long-term) RB951Ui-2HnD",
                     "ifAlias": "MIKHOLAP",
@@ -21020,7 +21015,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "AVRIP",
-                    "remote_port": "port e0/1/1 (00017afdb21c)",
+                    "remote_port": "port e0/1/1",
                     "remote_platform": null,
                     "remote_version": "MyPower S3100-20TP",
                     "ifAlias": "tengigabitethernet1/0/1",
@@ -23844,7 +23839,8 @@
                     "ifStackStatus": "active"
                 }
             ]
-        }
+        },
+        "poller": "matches discovery"
     },
     "transceivers": {
         "discovery": {

@@ -2691,112 +2691,96 @@
                 {
                     "state_name": "mtxrOpticalRxLoss",
                     "state_descr": "no",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrOpticalRxLoss",
                     "state_descr": "yes",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "mtxrOpticalRxLoss",
                     "state_descr": "null",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "mtxrOpticalTxFault",
                     "state_descr": "no",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrOpticalTxFault",
                     "state_descr": "yes",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "mtxrOpticalTxFault",
                     "state_descr": "null",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "mtxrPOEStatus",
                     "state_descr": "disabled",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "mtxrPOEStatus",
                     "state_descr": "waitingForLoad",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "mtxrPOEStatus",
                     "state_descr": "poweredOn",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrPOEStatus",
                     "state_descr": "overload",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "mtxrWl60GConnected",
                     "state_descr": "disconnected",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "mtxrWl60GConnected",
                     "state_descr": "connected",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrWl60GMode",
                     "state_descr": "AP Bridge",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrWl60GMode",
                     "state_descr": "Station Bridge",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrWl60GMode",
                     "state_descr": "Sniff",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "mtxrWl60GMode",
                     "state_descr": "Bridge",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 }
@@ -3825,6 +3809,34 @@
                     "context_name": "",
                     "ipv4_network": "192.168.88.0/24",
                     "ifIndex": 3
+                }
+            ]
+        }
+    },
+    "discovery-protocols": {
+        "discovery": {
+            "links": [
+                {
+                    "active": 1,
+                    "protocol": "lldp",
+                    "remote_hostname": "Jizak",
+                    "remote_port": "eth1-kupeckeho_lan",
+                    "remote_platform": null,
+                    "remote_version": "",
+                    "ifAlias": "ether4",
+                    "ifDescr": "ether4",
+                    "ifName": "ether4"
+                },
+                {
+                    "active": 1,
+                    "protocol": "lldp",
+                    "remote_hostname": "Spoj Jizak-Kupeckeho-60G",
+                    "remote_port": "bridge/wlan60-1",
+                    "remote_platform": null,
+                    "remote_version": "MikroTik RouterOS 6.48.2 (stable) RBLHGG-60ad",
+                    "ifAlias": "wlan1",
+                    "ifDescr": "wlan1",
+                    "ifName": "wlan1"
                 }
             ]
         }

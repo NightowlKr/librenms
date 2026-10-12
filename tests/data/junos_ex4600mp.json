@@ -8,8 +8,8 @@
                     "sysDescr": "hostname.example.org",
                     "sysContact": "<private>",
                     "version": "18.4R4",
-                    "hardware": "Juniper Virtual Chassis Switch",
-                    "features": null,
+                    "hardware": "EX4300-48MP",
+                    "features": "Virtual Chassis of 8 members",
                     "location": "<private>",
                     "os": "junos",
                     "type": "network",
@@ -173212,133 +173212,114 @@
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "unknown",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "empty",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "present",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "ready",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "announceOnline",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "online",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "anounceOffline",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "offline",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "diagnostic",
-                    "state_draw_graph": 1,
                     "state_value": 9,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxFruTable",
                     "state_descr": "standby",
-                    "state_draw_graph": 1,
                     "state_value": 10,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxRedAlarmState",
                     "state_descr": "unknown",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxRedAlarmState",
                     "state_descr": "off",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxRedAlarmState",
                     "state_descr": "on",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "jnxVirtualChassisMemberTable",
                     "state_descr": "master",
-                    "state_draw_graph": 0,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxVirtualChassisMemberTable",
                     "state_descr": "backup",
-                    "state_draw_graph": 0,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxVirtualChassisMemberTable",
                     "state_descr": "linecard",
-                    "state_draw_graph": 0,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxYellowAlarmState",
                     "state_descr": "unknown",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "jnxYellowAlarmState",
                     "state_descr": "off",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "jnxYellowAlarmState",
                     "state_descr": "on",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 }
@@ -180827,7 +180808,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "core.example.org",
-                    "remote_port": "518 (0000000f4e40)",
+                    "remote_port": "518",
                     "remote_platform": null,
                     "remote_version": "Juniper Networks, Inc. ex4600-40f Ethernet Switch, kernel JUNOS 14.1, Build date: 2010-11-09 02:00:00 UTC Copyright (c) 1996-2016 Juniper Networks, Inc.",
                     "ifAlias": "et-0/2/0",
@@ -180838,7 +180819,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "core.example.org",
-                    "remote_port": "533 (0000000f4e40)",
+                    "remote_port": "533",
                     "remote_platform": null,
                     "remote_version": "Juniper Networks, Inc. ex4600-40f Ethernet Switch, kernel JUNOS 14.1, Build date: 2010-11-09 02:00:00 UTC Copyright (c) 1996-2016 Juniper Networks, Inc.",
                     "ifAlias": "et-1/2/0",
@@ -183074,7 +183055,8 @@
                     "ifStackStatus": "active"
                 }
             ]
-        }
+        },
+        "poller": "matches discovery"
     },
     "hr-device": {
         "discovery": {
@@ -183102,22 +183084,22 @@
         "discovery": {
             "ipv6_nd": [
                 {
-                    "mac_address": "00:00:00:ff:10:01",
+                    "mac_address": "000000ff1001",
                     "ipv6_address": "fd00:0000:0000:0000:0000:0000:0000:0001",
                     "context_name": ""
                 },
                 {
-                    "mac_address": "00:00:00:01:74:f7",
+                    "mac_address": "0000000174f7",
                     "ipv6_address": "fd00:0000:0000:0000:0000:0000:0000:0020",
                     "context_name": ""
                 },
                 {
-                    "mac_address": "00:00:00:01:74:f7",
+                    "mac_address": "0000000174f7",
                     "ipv6_address": "fe80:0000:0000:0000:0000:0000:0071:74f7",
                     "context_name": ""
                 },
                 {
-                    "mac_address": "00:00:00:ff:10:01",
+                    "mac_address": "000000ff1001",
                     "ipv6_address": "fe80:0000:0000:0000:0210:db00:faff:1001",
                     "context_name": ""
                 }

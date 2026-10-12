@@ -67658,322 +67658,276 @@
                 {
                     "state_name": "alaChasEntPhysFanStatus",
                     "state_descr": "no-error",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "alaChasEntPhysFanStatus",
                     "state_descr": "notRunning",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "alaChasEntPhysFanStatus",
                     "state_descr": "running",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Not Redundant",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (2)",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (3)",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (4)",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (5)",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (6)",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (7)",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "alclnkaggAggNbrAttachedPorts",
                     "state_descr": "Redundant (8)",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasControlCertifyStatus",
                     "state_descr": "Unknown",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "chasControlCertifyStatus",
                     "state_descr": "Need Certify",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "chasControlCertifyStatus",
                     "state_descr": "Certified",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasControlSynchronizationStatus",
                     "state_descr": "Unknown",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "chasControlSynchronizationStatus",
                     "state_descr": "Mono Control Module",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "chasControlSynchronizationStatus",
                     "state_descr": "Not Synchronized",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "chasControlSynchronizationStatus",
                     "state_descr": "Synchronized",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Up",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Down",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Testing",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Unknown",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 3
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Secondary",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "NotPresent",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "UnPowered",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Master",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "Idle",
-                    "state_draw_graph": 1,
                     "state_value": 9,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "chasEntPhysOperStatus",
                     "state_descr": "PwrSave",
-                    "state_draw_graph": 1,
                     "state_value": 10,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Init",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Running",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Invalid Chassis Id",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Hello Down",
-                    "state_draw_graph": 1,
                     "state_value": 3,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Duplicate Chassis Id",
-                    "state_draw_graph": 1,
                     "state_value": 4,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch Image",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch Chassis Type",
-                    "state_draw_graph": 1,
                     "state_value": 6,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch Hello Interval",
-                    "state_draw_graph": 1,
                     "state_value": 7,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch Control Vlan",
-                    "state_draw_graph": 1,
                     "state_value": 8,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch Group",
-                    "state_draw_graph": 1,
                     "state_value": 9,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Mismatch License Config",
-                    "state_draw_graph": 1,
                     "state_value": 10,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Invalid License",
-                    "state_draw_graph": 1,
                     "state_value": 11,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Split Topology",
-                    "state_draw_graph": 1,
                     "state_value": 12,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Command Shutdown",
-                    "state_draw_graph": 1,
                     "state_value": 13,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisStatus",
                     "state_descr": "Failure Shutdown",
-                    "state_draw_graph": 1,
                     "state_value": 14,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "virtualChassisVflMemberPortOperStatus",
                     "state_descr": "Disabled",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 1
                 },
                 {
                     "state_name": "virtualChassisVflMemberPortOperStatus",
                     "state_descr": "Up",
-                    "state_draw_graph": 1,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "virtualChassisVflMemberPortOperStatus",
                     "state_descr": "Down",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 2
                 }
@@ -78081,7 +78035,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj-30",
-                    "remote_port": "2010 (2cfaa2bce2f6)",
+                    "remote_port": "2010",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 1/2/1",
@@ -78092,7 +78046,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj1-150",
-                    "remote_port": "202012 (2cfaa2d2feb5)",
+                    "remote_port": "202012",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 1/2/11",
@@ -78103,7 +78057,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj1-150",
-                    "remote_port": "102012 (2cfaa2d2feb5)",
+                    "remote_port": "102012",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 1/2/12",
@@ -78114,7 +78068,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj-30",
-                    "remote_port": "1010 (2cfaa2bce2f6)",
+                    "remote_port": "1010",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 1/2/2",
@@ -78125,7 +78079,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj1-150",
-                    "remote_port": "2012 (2cfaa2d2feb5)",
+                    "remote_port": "2012",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 2/2/11",
@@ -78136,7 +78090,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "rox-lugoj1-150",
-                    "remote_port": "302012 (2cfaa2d2feb5)",
+                    "remote_port": "302012",
                     "remote_platform": null,
                     "remote_version": "",
                     "ifAlias": "Alcatel-Lucent OS6900 XNI 2/2/12",

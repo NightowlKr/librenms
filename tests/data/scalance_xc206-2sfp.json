@@ -2858,77 +2858,66 @@
                 {
                     "state_name": "C-Plug",
                     "state_descr": "notPresent",
-                    "state_draw_graph": 0,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "C-Plug",
                     "state_descr": "notAccepted",
-                    "state_draw_graph": 0,
                     "state_value": 4,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "C-Plug",
                     "state_descr": "accepted",
-                    "state_draw_graph": 1,
                     "state_value": 5,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "C-Plug",
                     "state_descr": "factory",
-                    "state_draw_graph": 0,
                     "state_value": 6,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "C-Plug",
                     "state_descr": "missing",
-                    "state_draw_graph": 0,
                     "state_value": 7,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "Faults",
                     "state_descr": "noFault",
-                    "state_draw_graph": 0,
                     "state_value": 1,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "Faults",
                     "state_descr": "fault",
-                    "state_draw_graph": 1,
                     "state_value": 2,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "Power Supply 1",
                     "state_descr": "active",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "Power Supply 1",
                     "state_descr": "inactive",
-                    "state_draw_graph": 0,
                     "state_value": 1,
                     "state_generic_value": 2
                 },
                 {
                     "state_name": "Power Supply 2",
                     "state_descr": "active",
-                    "state_draw_graph": 1,
                     "state_value": 0,
                     "state_generic_value": 0
                 },
                 {
                     "state_name": "Power Supply 2",
                     "state_descr": "inactive",
-                    "state_draw_graph": 0,
                     "state_value": 1,
                     "state_generic_value": 2
                 }
@@ -3395,7 +3384,7 @@
                     "active": 1,
                     "protocol": "lldp",
                     "remote_hostname": "C3560",
-                    "remote_port": "Gi1/0/16 (3c410ee84b80)",
+                    "remote_port": "Gi1/0/16",
                     "remote_platform": null,
                     "remote_version": "Cisco IOS Software, C3560CX Software (C3560CX-UNIVERSALK9-M), Version 15.2(4)E8, RELEASE SOFTWARE (fc3)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2019 by Cisco Systems, Inc.\nCompiled Fri 15-Mar-19 12:14 by prod_rel_team",
                     "ifAlias": "Siemens, SIMATIC NET, SFP992-1LD, 6GK5 992-1AM00-8AA0, HW: Version 2, FW: Version -, S-, Ethernet Port, R0/S0/X1 P8",

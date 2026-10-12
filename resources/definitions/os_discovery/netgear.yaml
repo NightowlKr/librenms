@@ -10,6 +10,23 @@ modules:
         serial: ENTITY-MIB::entPhysicalSerialNum.1
         version: ENTITY-MIB::entPhysicalSoftwareRev.1
     sensors:
+        power:
+            data:
+                -
+                    oid: POWER-ETHERNET-MIB::pethMainPseTable
+                    value: POWER-ETHERNET-MIB::pethMainPsePower
+                    num_oid: '.1.3.6.1.2.1.105.1.3.1.1.2.{{ $index }}'
+                    index: 'pethMainPsePower.{{ $index }}'
+                    group: "PoE"
+                    descr: "PoE Budget Total - ID {{ $index }}"
+                -
+                    oid: POWER-ETHERNET-MIB::pethMainPseTable
+                    value: POWER-ETHERNET-MIB::pethMainPseConsumptionPower
+                    num_oid: '.1.3.6.1.2.1.105.1.3.1.1.4.{{ $index }}'
+                    index: 'pethMainPseConsumptionPower.{{ $index }}'
+                    divisor: 1000
+                    group: "PoE"
+                    descr: "PoE Budget Consumed - ID {{ $index }}"
         additional_oids:
             data:
                 -
@@ -36,13 +53,13 @@ modules:
                     index: 'boxServicesFanItemState.{{ $index }}'
                     state_name: boxServicesFanItemState
                     states:
-                        - { value: 1, generic: 0, graph: 0, descr: notpresent }
-                        - { value: 2, generic: 0, graph: 0, descr: operational }
-                        - { value: 3, generic: 2, graph: 0, descr: failed }
-                        - { value: 4, generic: 3, graph: 0, descr: powering }
-                        - { value: 5, generic: 3, graph: 0, descr: nopower }
-                        - { value: 6, generic: 3, graph: 0, descr: notpowering }
-                        - { value: 7, generic: 1, graph: 0, descr: incompatible }
+                        - { value: 1, generic: 0, descr: notpresent }
+                        - { value: 2, generic: 0, descr: operational }
+                        - { value: 3, generic: 2, descr: failed }
+                        - { value: 4, generic: 3, descr: powering }
+                        - { value: 5, generic: 3, descr: nopower }
+                        - { value: 6, generic: 3, descr: notpowering }
+                        - { value: 7, generic: 1, descr: incompatible }
                 -
                     oid: NETGEAR-BOXSERVICES-PRIVATE-MIB::boxServicesPowSuppliesTable
                     value: NETGEAR-BOXSERVICES-PRIVATE-MIB::boxServicesPowSupplyItemState
@@ -51,10 +68,10 @@ modules:
                     index: 'boxServicesPowSupplyItemState.{{ $index }}'
                     state_name: boxServicesPowSupplyItemState
                     states:
-                        - { value: 1, generic: 0, graph: 0, descr: notpresent }
-                        - { value: 2, generic: 0, graph: 0, descr: operational }
-                        - { value: 3, generic: 2, graph: 0, descr: failed }
-                        - { value: 4, generic: 3, graph: 0, descr: powering }
-                        - { value: 5, generic: 3, graph: 0, descr: nopower }
-                        - { value: 6, generic: 3, graph: 0, descr: notpowering }
-                        - { value: 7, generic: 1, graph: 0, descr: incompatible }
+                        - { value: 1, generic: 0, descr: notpresent }
+                        - { value: 2, generic: 0, descr: operational }
+                        - { value: 3, generic: 2, descr: failed }
+                        - { value: 4, generic: 3, descr: powering }
+                        - { value: 5, generic: 3, descr: nopower }
+                        - { value: 6, generic: 3, descr: notpowering }
+                        - { value: 7, generic: 1, descr: incompatible }

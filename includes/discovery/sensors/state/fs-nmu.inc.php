@@ -23,6 +23,9 @@
  * @copyright  2020 Jozef Rebjak
  * @author     Jozef Rebjak <jozefrebjak@icloud.com>
  */
+
+use LibreNMS\Enum\SensorType;
+
 $power1 = SnmpQuery::get('OAP-NMU::power1State.0')->value();
 $power2 = SnmpQuery::get('OAP-NMU::power2State.0')->value();
 $fan = SnmpQuery::get('OAP-NMU::fanState.0')->value();
@@ -35,37 +38,37 @@ $index = '0';
 if (is_numeric($power1)) {
     $state_name = 'power1State';
     $states = [
-        ['value' => 0, 'generic' => 2, 'graph' => 0, 'descr' => 'off'],
-        ['value' => 1, 'generic' => 0, 'graph' => 0, 'descr' => 'on'],
+        ['value' => 0, 'generic' => 2, 'descr' => 'off'],
+        ['value' => 1, 'generic' => 0, 'descr' => 'on'],
     ];
     create_state_index($state_name, $states);
 
     $descr = 'Power 1 State';
-    discover_sensor(null, 'state', $device, $oid_power1, $index, $state_name, $descr, 1, 1, null, null, null, null, $power1, 'snmp', $index);
+    discover_sensor(null, SensorType::State, $device, $oid_power1, $index, $state_name, $descr, 1, 1, null, null, null, null, $power1, 'snmp', $index);
 }
 
 // Power 2 State
 if (is_numeric($power2)) {
     $state_name = 'power2State';
     $states = [
-        ['value' => 0, 'generic' => 2, 'graph' => 0, 'descr' => 'off'],
-        ['value' => 1, 'generic' => 0, 'graph' => 0, 'descr' => 'on'],
+        ['value' => 0, 'generic' => 2, 'descr' => 'off'],
+        ['value' => 1, 'generic' => 0, 'descr' => 'on'],
     ];
     create_state_index($state_name, $states);
 
     $descr = 'Power 2 State';
-    discover_sensor(null, 'state', $device, $oid_power2, $index, $state_name, $descr, 1, 1, null, null, null, null, $power2, 'snmp', $index);
+    discover_sensor(null, SensorType::State, $device, $oid_power2, $index, $state_name, $descr, 1, 1, null, null, null, null, $power2, 'snmp', $index);
 }
 
 // Fan State
 if (is_numeric($fan)) {
     $state_name = 'fanState';
     $states = [
-        ['value' => 0, 'generic' => 2, 'graph' => 0, 'descr' => 'off'],
-        ['value' => 1, 'generic' => 0, 'graph' => 0, 'descr' => 'on'],
+        ['value' => 0, 'generic' => 2, 'descr' => 'off'],
+        ['value' => 1, 'generic' => 0, 'descr' => 'on'],
     ];
     create_state_index($state_name, $states);
 
     $descr = 'Fan State';
-    discover_sensor(null, 'state', $device, $oid_fan, $index, $state_name, $descr, 1, 1, null, null, null, null, $fan, 'snmp', $index);
+    discover_sensor(null, SensorType::State, $device, $oid_fan, $index, $state_name, $descr, 1, 1, null, null, null, null, $fan, 'snmp', $index);
 }

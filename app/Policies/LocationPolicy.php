@@ -14,11 +14,19 @@ class LocationPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $this->hasGlobalPermission($user, 'view')
+        return $this->hasGlobalPermission($user, 'view', true)
             || $this->hasGlobalPermission($user, 'viewAll')
             || $this->hasGlobalPermission($user, 'create')
             || $this->hasGlobalPermission($user, 'update')
             || $this->hasGlobalPermission($user, 'delete');
+    }
+
+    /**
+     * Determine whether the user can view all models.
+     */
+    public function viewAll(User $user): bool
+    {
+        return $this->hasGlobalPermission($user, 'viewAll');
     }
 
     /**
@@ -30,8 +38,8 @@ class LocationPolicy
             return true;
         }
 
-        return $this->hasGlobalPermission($user, 'view')
-            || Location::hasAccess($user)->where('id', $location->id)->exists(); // FIXME not a db query
+        return $this->hasGlobalPermission($user, 'view', true)
+            && Location::hasAccess($user)->where('id', $location->id)->exists(); // FIXME not a db query
     }
 
     /**
@@ -45,16 +53,18 @@ class LocationPolicy
     /**
      * Determine whether the user can update the location.
      */
-    public function update(User $user): bool
+    public function update(User $user, Location $location): bool
     {
-        return $this->hasGlobalPermission($user, 'update');
+        return $this->hasGlobalPermission($user, 'update')
+        && Location::hasAccess($user)->where('id', $location->id)->exists(); // FIXME not a db query
     }
 
     /**
      * Determine whether the user can delete the location.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, Location $location): bool
     {
-        return $this->hasGlobalPermission($user, 'delete');
+        return $this->hasGlobalPermission($user, 'delete')
+        && Location::hasAccess($user)->where('id', $location->id)->exists(); // FIXME not a db query
     }
 }

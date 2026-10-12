@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Log;
 use LibreNMS\Util\StringHelpers;
+use LibreNMS\Enum\SensorType;
 
 echo 'Printer Status and Error State ';
 $state = SnmpQuery::get('HOST-RESOURCES-MIB::hrDeviceStatus.1')->value();
@@ -11,17 +12,17 @@ if (is_numeric($state)) {
     create_state_index(
         $state_name,
         [
-            ['value' => 1, 'generic' => 3, 'graph' => 0, 'descr' => 'Unknown'],
-            ['value' => 2, 'generic' => 0, 'graph' => 0, 'descr' => 'Running'],
-            ['value' => 3, 'generic' => 1, 'graph' => 0, 'descr' => 'Warning'],
-            ['value' => 4, 'generic' => 0, 'graph' => 0, 'descr' => 'Testing'],
-            ['value' => 5, 'generic' => 2, 'graph' => 0, 'descr' => 'Down'],
+            ['value' => 1, 'generic' => 3, 'descr' => 'Unknown'],
+            ['value' => 2, 'generic' => 0, 'descr' => 'Running'],
+            ['value' => 3, 'generic' => 1, 'descr' => 'Warning'],
+            ['value' => 4, 'generic' => 0, 'descr' => 'Testing'],
+            ['value' => 5, 'generic' => 2, 'descr' => 'Down'],
         ]
     );
     $sensor_index = 0;
     discover_sensor(
         null,
-        'state',
+        SensorType::State,
         $device,
         '.1.3.6.1.2.1.25.3.2.1.5.1',
         $sensor_index,
@@ -45,17 +46,17 @@ if ($state) {
     //Create State Index
     $printer_states =
         [
-            ['value' => 0, 'generic' => 0, 'graph' => 0, 'descr' => 'Normal'],
-            ['value' => 1, 'generic' => 1, 'graph' => 0, 'descr' => 'Paper Low'],
-            ['value' => 2, 'generic' => 2, 'graph' => 0, 'descr' => 'No Paper'],
-            ['value' => 3, 'generic' => 1, 'graph' => 0, 'descr' => 'Toner Low'],
-            ['value' => 4, 'generic' => 2, 'graph' => 0, 'descr' => 'No Toner'],
-            ['value' => 5, 'generic' => 2, 'graph' => 0, 'descr' => 'Door Open'],
-            ['value' => 6, 'generic' => 2, 'graph' => 0, 'descr' => 'Jammed'],
-            ['value' => 7, 'generic' => 2, 'graph' => 0, 'descr' => 'Offline'],
-            ['value' => 8, 'generic' => 2, 'graph' => 0, 'descr' => 'Service Needed'],
-            ['value' => 9, 'generic' => 1, 'graph' => 0, 'descr' => 'Warning, multiple issues'],
-            ['value' => 10, 'generic' => 2, 'graph' => 0, 'descr' => 'Critical, multiple issues'],
+            ['value' => 0, 'generic' => 0, 'descr' => 'Normal'],
+            ['value' => 1, 'generic' => 1, 'descr' => 'Paper Low'],
+            ['value' => 2, 'generic' => 2, 'descr' => 'No Paper'],
+            ['value' => 3, 'generic' => 1, 'descr' => 'Toner Low'],
+            ['value' => 4, 'generic' => 2, 'descr' => 'No Toner'],
+            ['value' => 5, 'generic' => 2, 'descr' => 'Door Open'],
+            ['value' => 6, 'generic' => 2, 'descr' => 'Jammed'],
+            ['value' => 7, 'generic' => 2, 'descr' => 'Offline'],
+            ['value' => 8, 'generic' => 2, 'descr' => 'Service Needed'],
+            ['value' => 9, 'generic' => 1, 'descr' => 'Warning, multiple issues'],
+            ['value' => 10, 'generic' => 2, 'descr' => 'Critical, multiple issues'],
         ];
     $bit_flags = StringHelpers::bitsToIndices($state);
     $is_critical = false;
@@ -86,7 +87,7 @@ if ($state) {
     $sensor_index = 0;
     discover_sensor(
         null,
-        'state',
+        SensorType::State,
         $device,
         '.1.3.6.1.2.1.25.3.5.1.2.1',
         $sensor_index,

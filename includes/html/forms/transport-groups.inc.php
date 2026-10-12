@@ -24,14 +24,13 @@
  * @author     Vivia Nguyen-Tran <vivia@ualberta.ca>
  */
 
-use App\Models\AlertTransport;
 use App\Models\AlertTransportGroup;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 header('Content-type: application/json');
 
-if (Gate::denies('update', AlertTransport::class)) {
+if (Gate::denies('alert-transport.update')) {
     exit(json_encode([
         'status' => 'error',
         'message' => 'You need to be admin',
@@ -58,9 +57,7 @@ if (empty($name)) {
     $message = 'Not enough group members';
 } else {
     if (is_numeric($group_id) && $group_id > 0) {
-        dbUpdate([
-            'transport_group_name' => $name,
-        ], 'alert_transport_groups', '`transport_group_id`=?', [$group_id]);
+        AlertTransportGroup::where('transport_group_id', $group_id)->update(['transport_group_name' => $name]);
     } else {
         // Insert into db
         $group_id = dbInsert([
