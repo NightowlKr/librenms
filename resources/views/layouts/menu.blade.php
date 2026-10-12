@@ -106,25 +106,25 @@
                                                                 aria-hidden="true"></i> {{ __('Inventory') }}</a></li>
                         @if($package_count)
                             <li><a href="{{ url('search/search=packages') }}"><i class="fa fa-archive fa-fw fa-lg"
-                                                                                 aria-hidden="true"></i> {{ __('Packages') }}
+                                                                                 aria-hidden="true"></i> {{ __('search.packages') }}
                                 </a></li>
                         @endif
 
                         <li role="presentation" class="divider"></li>
                         <li><a href="{{ url('search/search=ipv4') }}"><i class="fa fa-search fa-fw fa-lg"
-                                                                         aria-hidden="true"></i> {{ __('IPv4 Address') }}
+                                                                         aria-hidden="true"></i> {{ __('search.ipv4') }}
                             </a></li>
                         <li><a href="{{ url('search/search=ipv6') }}"><i class="fa fa-search fa-fw fa-lg"
-                                                                         aria-hidden="true"></i> {{ __('IPv6 Address') }}
+                                                                         aria-hidden="true"></i> {{ __('search.ipv6') }}
                             </a></li>
                         <li><a href="{{ url('search/search=mac') }}"><i class="fa fa-search fa-fw fa-lg"
-                                                                        aria-hidden="true"></i> {{ __('MAC Address') }}</a>
+                                                                        aria-hidden="true"></i> {{ __('search.mac') }}</a>
                         </li>
                         <li><a href="{{ url('search/search=arp') }}"><i class="fa fa-search fa-fw fa-lg"
-                                                                        aria-hidden="true"></i> {{ __('ARP Tables') }}</a>
+                                                                        aria-hidden="true"></i> {{ __('search.arp_tables') }}</a>
                         </li>
                         <li><a href="{{ url('search/search=fdb') }}"><i class="fa fa-search fa-fw fa-lg"
-                                                                        aria-hidden="true"></i> {{ __('FDB Tables') }}</a>
+                                                                        aria-hidden="true"></i> {{ __('search.fdb_tables') }}</a>
                         </li>
                     </ul>
                 </li>
@@ -187,7 +187,7 @@
                                 </a></li>
                         @endcan
                         @can('device.update')
-                        <li><a href="{{ url('device-dependencies') }}"><i class="fa fa-group fa-fw fa-lg"></i> {{ __('Device Dependencies') }}</a></li>
+                        <li><a href="{{ route('device-dependencies.index') }}"><i class="fa fa-group fa-fw fa-lg"></i> {{ __('Device Dependencies') }}</a></li>
                         @endcan
                         @if($show_vmwinfo)
                             <li><a href="{{ url('vminfo') }}"><i
@@ -336,7 +336,7 @@
                         @endcan
 
                         @can('viewAny', \App\Models\Bill::class)
-                        <li><a href="{{ url('bills') }}"><i class="fa fa-money fa-fw fa-lg"
+                        <li><a href="{{ route('bills.index') }}"><i class="fa fa-money fa-fw fa-lg"
                                                             aria-hidden="true"></i> {{ __('Traffic Bills') }}</a></li>
                         @endCan
 
@@ -390,7 +390,7 @@
                                 </li>
                                 @endconfig
                                 @foreach($custom_port_descr as $custom_descr)
-                                    <li><a href="{{ route('porttype.graph', [urlencode($custom_descr['name'])]) }}"><i class="fa {{$custom_descr['icon']}} fa-fw fa-lg" aria-hidden="true"></i> {{ ucwords($custom_descr['name']) }}</a></li>
+                                    <li><a href="{{ route('porttype.graph', [$custom_descr['name']]) }}"><i class="fa {{$custom_descr['icon']}} fa-fw fa-lg" aria-hidden="true"></i> {{ ucwords($custom_descr['name']) }}</a></li>
                                 @endforeach
                             @endif
 
@@ -566,7 +566,7 @@
 {{-- Routing --}}
                 @if($routing_menu)
                     <li class="dropdown">
-                        <a href="{{ url('routing') }}" class="dropdown-toggle" data-hover="dropdown"
+                        <a href="{{ route('routing.index') }}" class="dropdown-toggle" data-hover="dropdown"
                            data-toggle="dropdown"><i class="fa fa-random fa-fw fa-lg fa-nav-icons"
                                                      aria-hidden="true"></i> <span
                                 class="tw:md:hidden tw:2xl:inline-block">{{ __('Routing') }}</span></a>
@@ -576,13 +576,13 @@
                                 <li role="presentation" class="divider"></li>
                             @endif
                             @foreach($routing_menu_group as $routing_menu_entry)
-                                <li><a href="{{ url('routing/protocol=' . $routing_menu_entry['url']) }}"><i class="fa fa-{{ $routing_menu_entry['icon'] }} fa-fw fa-lg" aria-hidden="true"></i> {{ $routing_menu_entry['text'] }}</a></li>
+                                <li><a href="{{ $routing_menu_entry['url'] }}"><i class="fa fa-{{ $routing_menu_entry['icon'] }} fa-fw fa-lg" aria-hidden="true"></i> {{ $routing_menu_entry['text'] }}</a></li>
                             @endforeach
                         @endforeach
 
                         @if($bgp_alerts)
                             <li role="presentation" class="divider"></li>
-                                <li><a href="{{ url('routing/protocol=bgp/adminstatus=start/state=down') }}"><i
+                                <li><a href="{{ route('routing.bgp', ['adminstatus' => 'start', 'state' => 'down']) }}"><i
                                             class="fa fa-exclamation-circle fa-fw fa-lg"
                                             aria-hidden="true"></i> {{ __('Alerted BGP :alert_count', ['alert_count' => $bgp_alerts]) }}
                                     </a></li>
@@ -601,13 +601,13 @@
 {{-- Alerts --}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
-                        <i class="fa fa-exclamation-circle text-{{ $alert_menu_class }} fa-fw fa-lg" aria-hidden="true"></i>
-                    @if ($alert_count > 0)<span class="badge badge-navbar-user count-notif badge-{{ $alert_menu_class }}">{{ $alert_count }}</span>@endif
-                    <span class="tw:md:hidden tw:2xl:inline-block">{{ __('Alerts') }}</span>
+                        <i class="fa fa-exclamation-circle text-{{ $alert_menu_class }} fa-fw fa-lg" aria-hidden=""true"></i>{{ __('Alerts') }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('alerts') }}"><i class="fa fa-bell fa-fw fa-lg"
-                                                             aria-hidden="true"></i> {{ __('Notifications') }}</a></li>
+                        @can('viewAny', \App\Models\Alert::class)
+                        <li><a href="{{ url('faults') }}"><i class="fa fa-bell fa-fw fa-lg"
+                                                             aria-hidden="true"></i> {{ __('Faults') }}</a></li>
+                        @endcan
                         @can('viewAny', \App\Models\AlertLog::class)
                         <li><a href="{{ url('alert-log') }}"><i class="fa fa-file-text fa-fw fa-lg"
                                                                 aria-hidden="true"></i> {{ __('Alert History') }}</a></li>
@@ -649,26 +649,28 @@
                  @keydown.escape="close()" @click.outside="close()">
                 <div class="form-group">
                     <input class="form-control" type="search" id="gsearch" name="gsearch" autocomplete="off"
-                           placeholder="{{ __('Type / to search') }}"
+                           placeholder="{{ __('search.placeholder') }}"
                            x-model="query" x-ref="input"
                            @input.debounce.250ms="run()" @focus="open = flat.length > 0"
-                           @keydown="onKey($event)">
+                           @keydown.down.prevent="move(1)"
+                           @keydown.up.prevent="move(-1)"
+                           @keydown.enter.prevent="goOrRun()">
                 </div>
-                <div x-show="open" x-cloak
-                     class="global-search-dropdown tw:absolute tw:right-0 tw:mt-1 tw:w-[50rem] tw:max-w-[90vw] tw:max-h-[70vh] tw:overflow-y-auto tw:bg-white tw:dark:bg-dark-gray-400 tw:border tw:border-gray-200 tw:dark:border-dark-gray-200 tw:rounded-lg tw:shadow-xl tw:z-50">
+                <div x-show="open" x-cloak x-ref="dropdown"
+                     class="global-search-dropdown tw:absolute tw:right-0 tw:mt-1 tw:min-w-70 tw:max-w-[90vw] tw:max-h-[70vh] tw:overflow-y-auto tw:bg-white tw:dark:bg-dark-gray-400 tw:border tw:border-gray-200 tw:dark:border-dark-gray-200 tw:rounded-lg tw:shadow-xl tw:z-50">
                     <div x-show="loading && flat.length === 0" class="tw:px-4 tw:py-3 tw:text-gray-500 tw:dark:text-dark-white-400">
-                        <i class="fa fa-spinner fa-spin"></i> {{ __('Searching...') }}
+                        <i class="fa fa-spinner fa-spin"></i> {{ __('search.searching') }}
                     </div>
                     <div x-show="!loading && flat.length === 0" class="tw:px-4 tw:py-3 tw:text-gray-500 tw:dark:text-dark-white-400">
-                        {{ __('No results') }}
+                        {{ __('search.no_results') }}
                     </div>
                     <template x-for="group in groups" :key="group.type">
                         <div>
                             <div class="tw:px-4 tw:py-1.5 tw:bg-gray-100 tw:dark:bg-dark-gray-200 tw:text-gray-600 tw:dark:text-dark-white-300 tw:text-xs tw:font-bold tw:uppercase" x-text="group.label"></div>
-                            <template x-for="item in group.results" :key="group.type + item.url">
-                                <a :href="item.url" @mouseenter="active = item.url"
+                            <template x-for="(item, index) in group.results" :key="index">
+                                <a :href="item.url" x-ref="item" @mouseenter="activeIndex = flat.findIndex(i => i === item)"
                                    class="tw:flex tw:items-center tw:gap-2.5 tw:px-4 tw:py-2 tw:no-underline tw:text-gray-800 tw:dark:text-dark-white-100 tw:hover:bg-gray-50 tw:dark:hover:bg-dark-gray-300"
-                                   :class="(active === item.url ? 'tw:bg-gray-100 tw:dark:bg-dark-gray-300 ' : '') + (item.status ? 'tw:border-l-5 ' + item.status : '')">
+                                   :class="(flat[activeIndex] === item ? 'tw:bg-gray-100 tw:dark:bg-dark-gray-300 ' : '') + (item.status ? 'tw:border-l-5 ' + item.status : '')">
                                     <template x-if="item.image">
                                         <img :src="item.image" class="tw:h-7 tw:w-7 tw:shrink-0 tw:object-contain tw:dark:bg-gray-50 tw:dark:rounded tw:dark:p-0.5">
                                     </template>
@@ -694,7 +696,7 @@
                         <span class="visible-xs-inline-block">{{ __('User') }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('notifications') }}"><span
+                        <li><a href="{{ route('notifications.index') }}"><span
                                     class="badge count-notif">{{ $notification_count }}</span> {{ __('Notifications') }}
                             </a></li>
                         <li><a href="{{ route('preferences.index') }}"><i class="fa fa-cog fa-fw fa-lg"
@@ -853,70 +855,121 @@
     document.addEventListener('alpine:init', () => {
         window.Alpine.data('globalSearch', () => ({
             query: '',
-            groups: [],
-            flat: [],
+            results: [], // groups returned by each endpoint, indexed like endpoints, unset while pending
             open: false,
-            loading: false,
-            active: '',
+            navigateOnLoad: false,
+            lastRunQuery: '',
+            activeIndex: -1,
             seq: 0,
             controllers: [],
             endpoints: @js([
                 route('ajax.search.devices'),
                 route('ajax.search.ports'),
+                route('ajax.search.fdb'),
+                route('ajax.search.arp'),
                 route('ajax.search.health'),
                 route('ajax.search.routing'),
                 route('ajax.search.logs'),
             ]),
-            order: ['devices', 'ports', 'sensors', 'wireless', 'storage', 'mempools', 'processors', 'bgp', 'eventlog'],
+            get groups() { return this.results.flat(); },
+            get flat() { return this.groups.flatMap(g => g.results); },
+            get pendingIndex() { return this.endpoints.findIndex((url, i) => this.results[i] === undefined); },
+            get loading() { return this.pendingIndex !== -1; },
             run() {
                 let q = this.query.trim();
                 if (q === '') { this.reset(); return; }
+                if (q === this.lastRunQuery) { this.open = true; return; }
+                this.search(q);
+            },
+            search(q, devicesFirst = false) {
+                this.cancel();
+                this.lastRunQuery = q;
                 this.open = true;
-                this.loading = true;
-                this.active = '';
-                this.groups = [];
-                this.flat = [];
-                this.controllers.forEach(c => c.abort());
-                this.controllers = [];
-                let seq = ++this.seq;
-                let collected = {};
-                let pending = this.endpoints.length;
-                this.endpoints.forEach(url => {
+                this.navigateOnLoad = false;
+                this.activeIndex = -1;
+                this.results = [];
+                let seq = this.seq;
+                let all = this.endpoints.map((url, i) => i);
+                if (!devicesFirst) {
+                    this.fetchEndpoints(q, seq, all);
+                    return;
+                }
+                // devices are what Enter almost always wants, only search everything else if there are none
+                this.fetchEndpoints(q, seq, [0]).then(() => {
+                    if (seq === this.seq && this.flat.length === 0) { this.fetchEndpoints(q, seq, all.slice(1)); }
+                });
+            },
+            fetchEndpoints(q, seq, indexes) {
+                return Promise.all(indexes.map(i => {
                     let controller = new AbortController();
                     this.controllers.push(controller);
-                    fetch(url + '?search=' + encodeURIComponent(q), {
+                    return fetch(this.endpoints[i] + '?search=' + encodeURIComponent(q), {
                         signal: controller.signal,
                         headers: { 'X-Requested-With': 'XMLHttpRequest' }
                     })
                         .then(r => r.json())
-                        .then(data => {
+                        .then(data => data.groups || [])
+                        .catch(() => [])
+                        .then(groups => {
                             if (seq !== this.seq) { return; }
-                            (data.groups || []).forEach(g => { collected[g.type] = g; });
-                            this.groups = this.order.filter(t => collected[t]).map(t => collected[t]);
-                            this.flat = this.groups.flatMap(g => g.results);
-                        })
-                        .catch(() => {})
-                        .finally(() => { pending--; if (seq === this.seq && pending === 0) { this.loading = false; } });
-                });
+                            this.results[i] = groups;
+                            if (this.navigateOnLoad) { this.navigateIfReady(); }
+                        });
+                }));
             },
-            onKey(e) {
-                if (e.key === 'ArrowDown') { e.preventDefault(); this.move(1); }
-                else if (e.key === 'ArrowUp') { e.preventDefault(); this.move(-1); }
-                else if (e.key === 'Enter') { e.preventDefault(); this.go(); }
+            // navigate to the top result once every higher priority endpoint has answered
+            navigateIfReady() {
+                let pending = this.pendingIndex;
+                let settled = pending === -1 ? this.results : this.results.slice(0, pending);
+                let first = settled.flat().flatMap(g => g.results)[0];
+                if (first) {
+                    this.navigate(first.url);
+                } else if (pending === -1) {
+                    this.navigateOnLoad = false;
+                }
+            },
+            goOrRun() {
+                let q = this.query.trim();
+                if (q === '') { return; }
+                if (this.flat[this.activeIndex]) {
+                    this.navigate(this.flat[this.activeIndex].url);
+                    return;
+                }
+                if (q !== this.lastRunQuery) { this.search(q, true); }
+                this.open = true;
+                this.navigateOnLoad = true;
+                this.navigateIfReady();
             },
             move(dir) {
                 if (this.flat.length === 0) { return; }
                 this.open = true;
-                let i = this.flat.findIndex(it => it.url === this.active);
-                i = (i + dir + this.flat.length) % this.flat.length;
-                this.active = this.flat[i].url;
+
+                if (this.activeIndex === -1) {
+                    this.activeIndex = dir > 0 ? 0 : this.flat.length - 1;
+                } else {
+                    this.activeIndex = (this.activeIndex + dir + this.flat.length) % this.flat.length;
+                }
+
+                this.$nextTick(() => {
+                    let dropdown = this.$refs.dropdown;
+                    if (!dropdown) { return; }
+                    let items = dropdown.querySelectorAll('a');
+                    let activeEl = items[this.activeIndex];
+                    if (activeEl) {
+                        activeEl.scrollIntoView({ block: 'nearest' });
+                    }
+                });
             },
-            go() {
-                let url = this.active || (this.flat[0] && this.flat[0].url);
-                if (url) { window.location.href = url; }
+            navigate(url) {
+                if (!url) { return; }
+                // free up connections still held by slower searches so the page request isn't queued behind them
+                this.cancel();
+                this.navigateOnLoad = false;
+                window.location.href = url;
             },
-            close() { this.open = false; },
-            reset() { this.controllers.forEach(c => c.abort()); this.controllers = []; this.groups = []; this.flat = []; this.open = false; this.active = ''; this.loading = false; },
+            cancel() { this.seq++; this.controllers.forEach(c => c.abort()); this.controllers = []; },
+            close() { this.open = false; this.navigateOnLoad = false; },
+            reset() { this.cancel(); this.results = []; this.open = false; this.activeIndex = -1; this.navigateOnLoad = false; this.lastRunQuery = ''; },
         }));
     });
 

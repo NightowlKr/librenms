@@ -191,7 +191,7 @@ class MenuComposer
             if ($routing_count['vrf']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'vrf',
+                        'url' => route('routing.vrf'),
                         'icon' => 'arrows',
                         'text' => 'VRFs',
                     ],
@@ -201,7 +201,7 @@ class MenuComposer
             if ($routing_count['mpls']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'mpls',
+                        'url' => route('routing.mpls'),
                         'icon' => 'tag',
                         'text' => 'MPLS',
                     ],
@@ -211,7 +211,7 @@ class MenuComposer
             if ($routing_count['ospf']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'ospf',
+                        'url' => route('routing.ospf'),
                         'icon' => 'circle-o-notch fa-rotate-180',
                         'text' => 'OSPF Devices',
                     ],
@@ -221,7 +221,7 @@ class MenuComposer
             if ($routing_count['ospfv3']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'ospfv3',
+                        'url' => route('routing.ospfv3'),
                         'icon' => 'circle-o-notch fa-rotate-180',
                         'text' => 'OSPFv3 Devices',
                     ],
@@ -231,7 +231,7 @@ class MenuComposer
             if ($routing_count['isis']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'isis',
+                        'url' => route('routing.isis'),
                         'icon' => 'arrows-alt',
                         'text' => 'ISIS Adjacencies',
                     ],
@@ -241,7 +241,7 @@ class MenuComposer
             if ($routing_count['cisco-otv']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'cisco-otv',
+                        'url' => route('routing.cisco-otv'),
                         'icon' => 'exchange',
                         'text' => 'Cisco OTV',
                     ],
@@ -253,17 +253,17 @@ class MenuComposer
                 $vars['bgp_alerts'] = BgpPeer::hasAccess($user)->inAlarm()->count();
                 $routing_menu[] = [
                     [
-                        'url' => 'bgp/type=all/graph=NULL',
+                        'url' => route('routing.bgp'),
                         'icon' => 'circle-o',
                         'text' => 'BGP All Sessions',
                     ],
                     [
-                        'url' => 'bgp/type=external/graph=NULL',
+                        'url' => route('routing.bgp', ['type' => 'external']),
                         'icon' => 'external-link',
                         'text' => 'BGP External',
                     ],
                     [
-                        'url' => 'bgp/type=internal/graph=NULL',
+                        'url' => route('routing.bgp', ['type' => 'internal']),
                         'icon' => 'external-link fa-rotate-180',
                         'text' => 'BGP Internal',
                     ],
@@ -276,7 +276,7 @@ class MenuComposer
             if ($routing_count['cef']) {
                 $routing_menu[] = [
                     [
-                        'url' => 'cef',
+                        'url' => route('routing.cef'),
                         'icon' => 'exchange',
                         'text' => 'Cisco CEF',
                     ],
@@ -286,19 +286,19 @@ class MenuComposer
         $vars['routing_menu'] = $routing_menu;
 
         // Alert menu
-        $alert_status = AlertRule::select('severity')
+        $alert_counts = AlertRule::selectRaw('severity, COUNT(*) as count')
             ->isActive()
             ->hasAccess($user)
             ->leftJoin('devices', 'alerts.device_id', '=', 'devices.device_id')
             ->where('devices.disabled', '=', '0')
             ->where('devices.ignore', '=', '0')
             ->groupBy('severity')
-            ->pluck('severity');
-        $vars['alert_count'] = $alert_status->count() ?? 0;
+            ->pluck('count', 'severity');
+        $vars['alert_count'] = $alert_counts->sum();
 
-        if ($alert_status->contains('critical')) {
+        if ($alert_counts->has('critical')) {
             $vars['alert_menu_class'] = 'danger';
-        } elseif ($alert_status->contains('warning')) {
+        } elseif ($alert_counts->has('warning')) {
             $vars['alert_menu_class'] = 'warning';
         } else {
             $vars['alert_menu_class'] = 'success';

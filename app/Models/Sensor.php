@@ -10,15 +10,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use LibreNMS\Enum\Sensor as SensorEnum;
+use LibreNMS\Enum\SensorType;
 use LibreNMS\Enum\SensorState;
+use LibreNMS\Interfaces\Models\HasSyncProtectedAttributes;
 use LibreNMS\Interfaces\Models\Keyable;
 use LibreNMS\Util\Number;
 use LibreNMS\Util\Rewrite;
 use LibreNMS\Util\Time;
 
 #[ObservedBy([SensorObserver::class])]
-class Sensor extends SensorModel implements Keyable
+class Sensor extends SensorModel implements HasSyncProtectedAttributes, Keyable
 {
     use HasFactory;
 
@@ -55,7 +56,7 @@ class Sensor extends SensorModel implements Keyable
     protected function casts(): array
     {
         return [
-            // 'sensor_class' => SensorEnum::class, // TODO
+            // 'sensor_class' => SensorType::class, // TODO
         ];
     }
 
@@ -115,7 +116,7 @@ class Sensor extends SensorModel implements Keyable
         return match ($this->sensor_class) {
             'temperature' => $user && UserPref::getPref($user, 'temp_units') == 'f' ? Rewrite::celsiusToFahrenheit($value) . ' °F' : round($value, 2) . ' °C',
             'state' => $this->currentTranslation()->state_descr ?? 'Unknown',
-            'current', 'power' => Number::formatSi($value, 3, 0, $this->unit()),
+            'current', 'power', 'frequency' => Number::formatSi($value, 3, 0, $this->unit()),
             'runtime' => Time::formatInterval($value * 60),
             'power_consumed' => trim(Number::formatSi($value * 1000, 5, 5, 'Wh')),
             'dbm' => round($value, 3) . ' ' . $this->unit(),
@@ -155,6 +156,16 @@ class Sensor extends SensorModel implements Keyable
     public function translations(): BelongsToMany
     {
         return $this->belongsToMany(StateTranslation::class, 'sensors_to_state_indexes', 'sensor_id', 'state_index_id', 'sensor_id', 'state_index_id');
+    }
+
+    /**
+     * Custom limits set by a user are not overwritten by discovery
+     *
+     * @return string[]
+     */
+    public function getSyncProtectedAttributes(): array
+    {
+        return $this->sensor_custom === 'Yes' ? self::LIMITS : [];
     }
 
     public function getCompositeKey(): string
@@ -243,7 +254,7 @@ class Sensor extends SensorModel implements Keyable
 
     public function icon(): string
     {
-        return SensorEnum::tryFrom($this->sensor_class)->icon() ?? '';
+        return SensorType::tryFrom($this->sensor_class)->icon() ?? '';
     }
 
     public function __toString(): string
