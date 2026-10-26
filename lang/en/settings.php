@@ -60,7 +60,6 @@ return [
             'virtualization' => ['name' => 'Virtualization Module'],
         ],
         'external' => [
-            'binaries' => ['name' => 'Binary Locations'],
             'location' => ['name' => 'Location Settings'],
             'graylog' => ['name' => 'Graylog Integration'],
             'oxidized' => ['name' => 'Oxidized Integration'],
@@ -938,9 +937,6 @@ return [
             'description' => 'Use HTML emails',
             'help' => 'Send HTML emails',
         ],
-        'email_sendmail_path' => [
-            'description' => 'Path to sendmail binary',
-        ],
         'email_smtp_auth' => [
             'description' => 'SMTP authentication',
             'help' => 'Enable this if your SMTP server requires authentication',
@@ -1026,12 +1022,6 @@ return [
                 'description' => 'Top Ports',
                 'help' => 'Number of top ports to show on the front page',
             ],
-        ],
-        'fping' => [
-            'description' => 'Path to fping',
-        ],
-        'fping6' => [
-            'description' => 'Path to fping6',
         ],
         'fping_options' => [
             'count' => [
@@ -1205,7 +1195,7 @@ return [
         ],
         'icmp_check' => [
             'description' => 'ICMP Check',
-            'help' => 'Enable the ICMP check for all devices. Devices are pinged to check if they are up or down. If you disable this, polling can fail to complete in time.',
+            'help' => 'Add the ICMP polling method to new devices. Devices are pinged to check if they are up or down. Existing devices are not changed, edit ICMP on the Polling page of each device. If you disable this, polling can fail to complete in time.',
         ],
         'ignore_mount' => [
             'description' => 'Mountpoints to be ignored',
@@ -1487,9 +1477,6 @@ return [
         'int_l2tp' => [
             'description' => 'Enable L2TP Ports menu',
             'help' => 'Enable L2TP ports menu in the web interface',
-        ],
-        'ipmitool' => [
-            'description' => 'Path to ipmtool',
         ],
         'ipmi.type' => [
             'description' => 'IPMI Type',
@@ -2017,10 +2004,6 @@ return [
             'description' => 'RANCID Repository Type',
             'help' => 'Type of repository used by RANCID, used to display config diffs on device pages',
         ],
-        'rancid_repo_url' => [
-            'description' => 'RANCID Repository URL',
-            'help' => 'RANCID repository URL, used to point at GitWeb that visualizes a bare Git repository',
-        ],
         'rancid_ignorecomments' => [
             'description' => 'RANCID Ignore Comments',
             'help' => 'Ignore comments when comparing RANCID configs, used to display config diffs on device pages',
@@ -2075,9 +2058,6 @@ return [
         'rrdcached' => [
             'description' => 'Enable rrdcached (socket)',
             'help' => 'Set the location of the rrdcached socket to enable rrdcached. This can be a unix or network socket (unix:/run/rrdcached.sock or localhost:42217).',
-        ],
-        'rrdtool' => [
-            'description' => 'Path to rrdtool',
         ],
         'rrdtool_tune' => [
             'description' => 'Tune all rrd port files to use max values',
@@ -2251,17 +2231,17 @@ return [
             ],
         ],
         'snmp' => [
+            'backend' => [
+                'description' => 'SNMP polling backend',
+                'help' => 'Net-Snmp runs external snmp* commands.  Php-Snmp uses the php-snmp module starting from php 8.6 for improved performance.',
+            ],
             'transports' => [
                 'description' => 'Transport (priority)',
                 'help' => 'Select the enabled transports and put them in the order to try.',
             ],
-            'version' => [
-                'description' => 'Version (priority)',
-                'help' => 'Select the enabled versions and put them in the order to try.',
-            ],
-            'community' => [
-                'description' => 'Communities (priority)',
-                'help' => 'Enter the community strings for v1 and v2c and put them in the order to try',
+            'default_credentials' => [
+                'description' => 'Default Credentials (priority)',
+                'help' => 'Select default SNMP credentials and put them in the order to try during device discovery and addition.',
             ],
             'max_oid' => [
                 'description' => 'Max OIDs',
@@ -2293,37 +2273,6 @@ return [
                 'description' => 'Retries',
                 'help' => 'How many times to retry the query',
             ],
-            'v3' => [
-                'description' => 'SNMP v3 Authentication (priority)',
-                'help' => 'Set up the v3 authentication variables and put them in the order to try',
-                'auth' => 'Auth',
-                'crypto' => 'Crypto',
-                'fields' => [
-                    'authalgo' => 'Algorithm',
-                    'authlevel' => 'Level',
-                    'authname' => 'Username',
-                    'authpass' => 'Password',
-                    'cryptoalgo' => 'Algorithm',
-                    'cryptopass' => 'Password',
-                ],
-                'level' => [
-                    'noAuthNoPriv' => 'No Authentication, No Privacy',
-                    'authNoPriv' => 'Authentication, No Privacy',
-                    'authPriv' => 'Authentication and Privacy',
-                ],
-            ],
-        ],
-        'snmpbulkwalk' => [
-            'description' => 'Path to snmpbulkwalk',
-        ],
-        'snmpget' => [
-            'description' => 'Path to snmpget',
-        ],
-        'snmpgetnext' => [
-            'description' => 'Path to snmpgetnext',
-        ],
-        'snmptranslate' => [
-            'description' => 'Path to snmptranslate',
         ],
         'snmptraps' => [
             'eventlog' => [
@@ -2334,9 +2283,6 @@ return [
                 'description' => 'Enable detailed logs',
                 'help' => 'Add all OIDs received with the trap in the eventlog',
             ],
-        ],
-        'snmpwalk' => [
-            'description' => 'Path to snmpwalk',
         ],
         'ssl_certificates' => [
             'auto_discover' => [
@@ -2433,9 +2379,6 @@ return [
             'description' => 'Title Image',
             'help' => 'Overrides the default title image. An SVG from the same server is included, and the SVG can use currentColor to match the current theme.',
         ],
-        'traceroute' => [
-            'description' => 'Path to traceroute',
-        ],
         'twofactor' => [
             'description' => 'Two-Factor',
             'help' => 'Allow users to activate and use Timebased (TOTP) or Counterbased (HOTP) One-Time Passwords (OTP)',
@@ -2490,9 +2433,6 @@ return [
         'uptime_warning' => [
             'description' => 'Show Device as warning if Uptime below (seconds)',
             'help' => 'Shows a device as a warning if the uptime is below this value. The custom map status also uses this setting. 0 disables the warning. The default is 24h.',
-        ],
-        'virsh' => [
-            'description' => 'Path to virsh',
         ],
         'web_mouseover' => [
             'description' => 'Enable mouseover',
@@ -2659,8 +2599,6 @@ return [
         'select' => ':value is not an allowed value',
         'text' => ':value is not allowed',
         'array' => 'Invalid format',
-        'password-array' => 'Invalid format',
-        'executable' => ':value is not a valid executable',
         'directory' => ':value is not a valid directory',
     ],
 ];
